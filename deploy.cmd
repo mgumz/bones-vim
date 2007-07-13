@@ -1,0 +1,1 @@
+copy vimrc ..\vimrc
