@@ -118,16 +118,10 @@ end
 
 if has("gui_running")
   set guioptions-=T
-
-  " cursor blinking
   set gcr=a:blinkwait1000-blinkon1000-blinkoff250
 
-  "colorscheme desert
-  "colorscheme zenburn
-  "colorscheme morning
-  "colorscheme nedit2
-  colorscheme blackdust
-  " Set our fonts
+  colorscheme inkpot
+
   if has("gui_kde")
     set guifont=Terminus/16/-1/5/50/0/0/0/0/0
   elseif has("gui_gtk")
