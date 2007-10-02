@@ -118,16 +118,10 @@ end
 
 if has("gui_running")
   set guioptions-=T
-
-  " cursor blinking
   set gcr=a:blinkwait1000-blinkon1000-blinkoff250
 
-  "colorscheme desert
-  "colorscheme zenburn
-  "colorscheme morning
-  "colorscheme nedit2
-  colorscheme blackdust
-  " Set our fonts
+  colorscheme inkpot
+
   if has("gui_kde")
     set guifont=Terminus/16/-1/5/50/0/0/0/0/0
   elseif has("gui_gtk")
@@ -251,6 +245,7 @@ map <unique> ,fs !!fortune starwars<CR>
 
 " insert date
 iab YMD <C-R>=strftime("%y%m%d %T")<CR>
+iab YMDb <C-R>=strftime("%Y-%m-%d")<CR>
 
 " enter in commandmode will insert an enter (604)
 nmap <CR> _i<CR><ESC>
