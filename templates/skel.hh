@@ -8,7 +8,7 @@
   copyr   : copyright (c) @YEAR@ by m. gumz
 
   license : see LICENSE
-  
+
   start   : @DATE@
 
 \* ---------------------------------------------------------------- */
