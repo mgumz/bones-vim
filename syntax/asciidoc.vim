@@ -39,7 +39,7 @@ syn region asciidocSubscript start=/\~\S/ end=/\(\~\|^$\)/
 syn region asciidocSuperscript start=/\^\S/ end=/\(\^\|^$\)/
 syn region asciidocAttributeEntry start=/^:\a/ end=/:\(\s\|$\)/ oneline
 syn region asciidocVLabel start=/^\s*/ end=/\S\(::\|;;\|:-\|??\)$/ oneline
-syn region asciidocHLabel start=/^\s*/ end=/\S\(::\|;;\)\s\+/ oneline
+syn region asciidocHLabel start=/^\s*/ end=/\S\(::\|;;\)\(\s\+\|\\$\)/ oneline
 syn region asciidocMacroAttributes matchgroup=asciidocRefMacro start=/<<\w\(\w\|-\)*,\?/ end=/>>/
 syn region asciidocMacroAttributes matchgroup=asciidocAnchorMacro start=/\[\{2}\(\w\|-\)\+,\?/ end=/\]\{2}/
 syn region asciidocMacroAttributes matchgroup=asciidocAnchorMacro start=/\[\{3}\(\w\|-\)\+/ end=/\]\{3}/
