@@ -25,7 +25,7 @@ set expandtab
 set guioptions=afgimrT
 set incsearch
 " Show tabs and trailing whitespace visually
-if (&termencoding == "utf-8") || has("gui_running")
+if (&termencoding == "utf-8")
     if v:version >= 700
         set list listchars=tab:»·,trail:·,extends:¿,nbsp:¿
     else
@@ -103,35 +103,6 @@ let g:alternateExtensions_hh = "cc,CC"
 let html_number_lines=1
 let html_use_css=1
 let use_xhtml=1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" gui - settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has('gui')
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=l
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=R
-end
-
-if has("gui_running")
-  set guioptions-=T
-  set gcr=a:blinkwait1000-blinkon1000-blinkoff250
-
-  colorscheme inkpot
-
-  if has("gui_kde")
-    set guifont=Terminus/16/-1/5/50/0/0/0/0/0
-  elseif has("gui_gtk")
-    set guifont=Terminus\ 16
-  elseif has("gui_running")
-    set guifont=-xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-1
-  endif
-else
-  colorscheme koehler
-endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -212,14 +183,6 @@ map <unique> ,btn :call AddBlock("tex", 64)<CR>
 map <unique> ,bts :call AddBlock("tex", 54)<CR>
 
 
-" 
-" number lines (yeah, another one)
-func! NumberLines(style) range
-  execute (a:firstline) . "," . a:lastline . '!cat -n'
-  if ( a:style == "c" )
-    execute (a:firstline) . "," . a:lastline . 's/^[[:space:]]*\([[:digit:]]\+\)*[[:space:]]*/\/* \1 *\//'
-  endif
-endfunc 
 
 " last used path
 if has("unix")
@@ -250,12 +213,13 @@ iab YMDb <C-R>=strftime("%Y-%m-%d")<CR>
 " enter in commandmode will insert an enter (604)
 nmap <CR> _i<CR><ESC>
 
-" map meta-left/right to  next/previos word
-map <unique> <M-Left> b
-imap <unique> <M-Left> <ESC>bi
-map <unique> <M-Right> e
-imap <unique> <M-Right> <ESC>ea
+" Make <space> in normal mode go down a page rather than left a
+" character
+noremap <space> <C-f>
 
+iab gcm_ int main(int argc, char* argv[]) {<cr>!cursor!;<cr>return 0;<cr>}<cr><Esc>:call search('!cursor!')<cr>cf;
+iab gcf_ int !func!() {<cr>
+iab gci_ if (!expr!) {<cr><cr>}<Esc>:call search('!expr!')<cr>cf!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " local stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
