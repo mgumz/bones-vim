@@ -217,9 +217,11 @@ nmap <CR> _i<CR><ESC>
 " character
 noremap <space> <C-f>
 
-iab gcm_ int main(int argc, char* argv[]) {<cr>!cursor!;<cr>return 0;<cr>}<cr><Esc>:call search('!cursor!')<cr>cf;
-iab gcf_ int !func!() {<cr>
-iab gci_ if (!expr!) {<cr><cr>}<Esc>:call search('!expr!')<cr>cf!
+" create various c/c++ stuff on the fly
+iab gcm_ int main(int argc, char* argv[]) {<cr>xxx;<cr>return 0;<cr>}<cr><Esc>?xxx<cr>c$
+iab gcf_ int xxx( edit_parameters ) {<cr>}<Esc>?xxx<cr>cw
+iab gci_ if ( xxx ) {<cr><cr>}<Esc>?xxx<cr>cw
+iab gce_ else {<cr>}<cr><Esc>kO
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " local stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
