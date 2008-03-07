@@ -112,7 +112,6 @@ let use_xhtml=1
 
 map <unique> ,<F2> :TlistSync<CR>
 map <unique> <F2>  :Tlist<CR>
-let Tlist_Ctags_Cmd = 'exuberant-ctags'
 let Tlist_Inc_Winwidth = 0
 "let Tlist_Use_Horiz_Window = 1
 
