@@ -124,9 +124,8 @@ let spell_executable="aspell"
 let spell_auto_type   = ''
 let spell_insert_mode = 0
 
-" calendar.vim
-map <unique> <F3>  :Calendar<CR>
-let g:calendar_diary = "~/.diary"
+" vtreeexplor.vim
+map <unique> <F3>  :VSTreeExplore<CR>
 
 " showmark.vim
 map <unique> <F4>  :ShowMarksToggle<CR>
