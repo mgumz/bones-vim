@@ -118,11 +118,13 @@ let Tlist_Inc_Winwidth = 0
 " minibufexpl
 map <unique> <F5>  :TMiniBufExplorer<cr>
 
-" spell.vim
+" vimspell.vim
 let mapleader="\\"
 let spell_executable="aspell"
 let spell_auto_type   = ''
 let spell_insert_mode = 0
+
+map <unique> <F12> :SpellCheck<CR>
 
 " vtreeexplor.vim
 map <unique> <F3>  :VSTreeExplore<CR>
@@ -196,13 +198,6 @@ func! Indent()
   "execute '%!indent -nsaf -npcs -cli4 -i4 -lp -nprs -nsaw -nut -cbi4 -bl -bli0 -bls -nbad -npsl'
   execute "%!indent -nsaf -npcs -cli4 -i4 -lp -nprs -nsaw -nut -cbi4 -bli0 -bls -nbad -npsl -bl -bad -brz -cez -cdwz -brs"
 endfunc
-
-map <unique> ,f  !!fortune<CR>
-map <unique> ,fa !!fortune hitchhiker<CR>
-map <unique> ,fh !!fortune homer<CR>
-map <unique> ,ff !!fortune futurama<CR>
-map <unique> ,fl !!fortune law<CR>
-map <unique> ,fs !!fortune starwars<CR>
 
 " insert date
 iab YMD <C-R>=strftime("%y%m%d %T")<CR>
