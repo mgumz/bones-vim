@@ -66,7 +66,7 @@ set statusline+=%=                           " right align
 set statusline+=0x%-8B\                      " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
-set dictionary=/usr/share/dict/words
+"set dictionary=/usr/share/dict/words
 
 " If possible, try to use a narrow number column.
 if v:version >= 700
@@ -117,14 +117,6 @@ let Tlist_Inc_Winwidth = 0
 
 " minibufexpl
 map <unique> <F5>  :TMiniBufExplorer<cr>
-
-" vimspell.vim
-let mapleader="\\"
-let spell_executable="aspell"
-let spell_auto_type   = ''
-let spell_insert_mode = 0
-
-map <unique> <F12> :SpellCheck<CR>
 
 " vtreeexplor.vim
 map <unique> <F3>  :VSTreeExplore<CR>
