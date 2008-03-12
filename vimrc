@@ -66,7 +66,7 @@ set statusline+=%=                           " right align
 set statusline+=0x%-8B\                      " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
-set dictionary=/usr/share/dict/words
+"set dictionary=/usr/share/dict/words
 
 " If possible, try to use a narrow number column.
 if v:version >= 700
@@ -118,15 +118,8 @@ let Tlist_Inc_Winwidth = 0
 " minibufexpl
 map <unique> <F5>  :TMiniBufExplorer<cr>
 
-" spell.vim
-let mapleader="\\"
-let spell_executable="aspell"
-let spell_auto_type   = ''
-let spell_insert_mode = 0
-
-" calendar.vim
-map <unique> <F3>  :Calendar<CR>
-let g:calendar_diary = "~/.diary"
+" vtreeexplor.vim
+map <unique> <F3>  :VSTreeExplore<CR>
 
 " showmark.vim
 map <unique> <F4>  :ShowMarksToggle<CR>
@@ -198,13 +191,6 @@ func! Indent()
   execute "%!indent -nsaf -npcs -cli4 -i4 -lp -nprs -nsaw -nut -cbi4 -bli0 -bls -nbad -npsl -bl -bad -brz -cez -cdwz -brs"
 endfunc
 
-map <unique> ,f  !!fortune<CR>
-map <unique> ,fa !!fortune hitchhiker<CR>
-map <unique> ,fh !!fortune homer<CR>
-map <unique> ,ff !!fortune futurama<CR>
-map <unique> ,fl !!fortune law<CR>
-map <unique> ,fs !!fortune starwars<CR>
-
 " insert date
 iab YMD <C-R>=strftime("%y%m%d %T")<CR>
 iab YMDb <C-R>=strftime("%Y-%m-%d")<CR>
@@ -221,6 +207,7 @@ iab gcm_ int main(int argc, char* argv[]) {<cr>xxx;<cr>return 0;<cr>}<cr><Esc>?x
 iab gcf_ int xxx( edit_parameters ) {<cr>}<Esc>?xxx<cr>cw
 iab gci_ if ( xxx ) {<cr><cr>}<Esc>?xxx<cr>cw
 iab gce_ else {<cr>}<cr><Esc>kO
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " local stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
