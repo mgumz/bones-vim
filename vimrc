@@ -207,6 +207,7 @@ iab gcm_ int main(int argc, char* argv[]) {<cr>xxx;<cr>return 0;<cr>}<cr><Esc>?x
 iab gcf_ int xxx( edit_parameters ) {<cr>}<Esc>?xxx<cr>cw
 iab gci_ if ( xxx ) {<cr><cr>}<Esc>?xxx<cr>cw
 iab gce_ else {<cr>}<cr><Esc>kO
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " local stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
