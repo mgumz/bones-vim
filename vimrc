@@ -20,6 +20,7 @@ if &term =~ "xterm" || &term == "rxvt-unicode"
 endif
 
 set nocompatible
+set cpoptions+=$
 set cindent
 set expandtab
 set guioptions=afgimrT
