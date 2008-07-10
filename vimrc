@@ -124,7 +124,7 @@ map <unique> <F3>  :VSTreeExplore<CR>
 
 " showmark.vim
 map <unique> <F4>  :ShowMarksToggle<CR>
-
+let g:showmarks_enable = 0
 
 " HTML
 let g:html_tag_case = 'lowercase'
