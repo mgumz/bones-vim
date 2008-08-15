@@ -164,9 +164,6 @@ func! AddBlock(style, nr)
   let &comments = s:save_co
 endfunc
 
-map <unique> ,x xp  " swap 2 chars
-map <unique> ,y ddp " swap 2 lines
-
 map <unique> ,bcb :call AddBlock("c", 74)<CR>
 map <unique> ,bcn :call AddBlock("c", 64)<CR>
 map <unique> ,bcs :call AddBlock("c", 54)<CR>
@@ -181,6 +178,15 @@ map <unique> ,btn :call AddBlock("tex", 64)<CR>
 map <unique> ,bts :call AddBlock("tex", 54)<CR>
 
 
+" create asciidoc style underlines
+func! UnderLine(char)
+    execute "normal YYpVr" . a:char . "o"
+endfunc
+
+map <unique> ,u1 :call UnderLine("=")<CR>
+map <unique> ,u2 :call UnderLine("-")<CR>
+map <unique> ,u3 :call UnderLine("^")<CR>
+map <unique> ,u4 :call UnderLine("~")<CR>
 
 " last used path
 if has("unix")
