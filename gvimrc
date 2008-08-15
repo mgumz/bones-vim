@@ -53,5 +53,5 @@ function! FoldSpellBalloon()
     return join( lines, has( "balloon_multiline" ) ? "\n" : " " )
 endfunction
 set balloonexpr=FoldSpellBalloon()
-set ballooneval
+set noballooneval " enable it manually
 
