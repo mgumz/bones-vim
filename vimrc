@@ -185,8 +185,9 @@ endfunc
 
 map <unique> ,u1 :call UnderLine("=")<CR>
 map <unique> ,u2 :call UnderLine("-")<CR>
-map <unique> ,u3 :call UnderLine("^")<CR>
-map <unique> ,u4 :call UnderLine("~")<CR>
+map <unique> ,u3 :call UnderLine("~")<CR>
+map <unique> ,u4 :call UnderLine("^")<CR>
+map <unique> ,u5 :call UnderLine("+")<CR>
 
 " last used path
 if has("unix")
