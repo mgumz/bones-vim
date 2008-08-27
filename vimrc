@@ -22,6 +22,10 @@ endif
 set nocompatible
 set cpoptions+=$
 set cindent
+
+" disable cindet for all .txt files
+autocmd BufRead *.txt set nocindent
+
 set expandtab
 set guioptions=afgimrT
 set incsearch
