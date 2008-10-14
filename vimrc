@@ -19,6 +19,7 @@ if &term =~ "xterm" || &term == "rxvt-unicode"
     endif
 endif
 
+set background=dark
 set nocompatible
 set cpoptions+=$
 set cindent
