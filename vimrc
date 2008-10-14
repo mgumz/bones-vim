@@ -27,7 +27,8 @@ set cindent
 autocmd BufRead *.txt set nocindent
 
 set expandtab
-set guioptions=afgimrT
+
+set hidden
 set incsearch
 " Show tabs and trailing whitespace visually
 if (&termencoding == "utf-8")
