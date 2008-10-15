@@ -13,12 +13,12 @@ set gcr=a:blinkwait1000-blinkon1000-blinkoff250
 colorscheme inkpot
 
 if has("gui_kde")
-    set guifont=Terminus/16/-1/5/50/0/0/0/0/0
+    set guifont=Consolas/13/-1/5/50/0/0/0/0/0
 elseif has("gui_gtk")
-    set guifont=Terminus\ 16
+    set guifont=Consolas\ 13
 elseif has("gui_running")
     if has("win32") || has("win64")
-        set guifont=Terminus:h12
+        set guifont=Consolas:h12
     else
         set guifont=-xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-1
     endif
