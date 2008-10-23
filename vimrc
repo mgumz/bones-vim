@@ -4,7 +4,6 @@
 "
 "   thanx: a _lot_ of stuff comes from ciaranm
 "
-"     $Id: vimrc,v 1.22 2004/02/05 14:59:23 mathias Exp $
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 scriptencoding utf-8
 
@@ -135,6 +134,7 @@ let g:showmarks_enable = 0
 " HTML
 let g:html_tag_case = 'lowercase'
 let g:no_html_toolbar = 'yes'
+let g:no_html_tab_mapping = 'yes'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
