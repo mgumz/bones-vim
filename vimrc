@@ -4,7 +4,10 @@
 "
 "   thanx: a _lot_ of stuff comes from ciaranm
 "
-"     $Id: vimrc,v 1.22 2004/02/05 14:59:23 mathias Exp $
+"   more helpful information:
+"
+"       http://items.sjbach.com/319/configuring-vim-right
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 scriptencoding utf-8
 
@@ -30,7 +33,11 @@ autocmd BufRead *.txt set nocindent
 set expandtab
 
 set hidden
+set hlsearch
 set incsearch
+set ignorecase
+set smartcase
+
 " Show tabs and trailing whitespace visually
 if (&termencoding == "utf-8")
     if v:version >= 700
@@ -52,12 +59,14 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set textwidth=78
+set scrolloff=3
 set visualbell vb
 set wildignore=*.o,*.bak,*.exe,*.so
 set wildmenu                                 "menu when tabcomplete
+set wildmode=list:longest
 set popt+=syntax:y                           "syntax when printing
 set lazyredraw
-
+set autochdir
 set laststatus=2
 set statusline=
 set statusline+=%-3.3n\                      " buffer number
