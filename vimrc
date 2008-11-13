@@ -144,6 +144,7 @@ let g:showmarks_enable = 0
 " HTML
 let g:html_tag_case = 'lowercase'
 let g:no_html_toolbar = 'yes'
+let g:no_html_tab_mapping = 'yes'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
