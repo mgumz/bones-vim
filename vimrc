@@ -66,7 +66,11 @@ set wildmenu                                 "menu when tabcomplete
 set wildmode=list:longest
 set popt+=syntax:y                           "syntax when printing
 set lazyredraw
-set autochdir
+
+if v:version >= 710
+    set autochdir
+endif
+
 set laststatus=2
 set statusline=
 set statusline+=%-3.3n\                      " buffer number
