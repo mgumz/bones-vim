@@ -67,9 +67,13 @@ set wildmode=list:longest
 set popt+=syntax:y                           "syntax when printing
 set lazyredraw
 
-if v:version >= 710
+" dunno why but checking for 
+"    has("netbeans_intg") || has("sun_workshop")
+" doesnt work on MacVim
+try
     set autochdir
-endif
+catch
+endtry
 
 set laststatus=2
 set statusline=
