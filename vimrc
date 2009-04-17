@@ -110,6 +110,13 @@ if has("eval")
     filetype indent on
 endif
 
+" add some more tags for the omnicompletion
+set tags=./tags,tags,substitute(globpath(&rtp, "tags/*.tags"), "\n", ",", "g")
+let OmniCpp_ShowScopeInAbbr = 1
+let OmniCpp_MayCompleteArrow = 1
+let OmniCpp_MayCompleteDot = 1
+
+
 " Enable modelines only on secure vim versions
 if (v:version == 603 && has("patch045")) || (v:version > 603)
     set modeline
