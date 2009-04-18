@@ -103,6 +103,7 @@ Nwrite	pi_netrw.txt	/*Nwrite*
 OmniCpp_DefaultNamespaces	omnicppcomplete.txt	/*OmniCpp_DefaultNamespaces*
 OmniCpp_DisplayMode	omnicppcomplete.txt	/*OmniCpp_DisplayMode*
 OmniCpp_GlobalScopeSearch	omnicppcomplete.txt	/*OmniCpp_GlobalScopeSearch*
+OmniCpp_LocalSearchDecl	omnicppcomplete.txt	/*OmniCpp_LocalSearchDecl*
 OmniCpp_MayCompleteArrow	omnicppcomplete.txt	/*OmniCpp_MayCompleteArrow*
 OmniCpp_MayCompleteDot	omnicppcomplete.txt	/*OmniCpp_MayCompleteDot*
 OmniCpp_MayCompleteScope	omnicppcomplete.txt	/*OmniCpp_MayCompleteScope*
@@ -1413,12 +1414,10 @@ crvdoc-licGPL	crefvimdoc.txt	/*crvdoc-licGPL*
 crvdoc-licLGPL	crefvimdoc.txt	/*crvdoc-licLGPL*
 crvdoc-limbugs	crefvimdoc.txt	/*crvdoc-limbugs*
 crvdoc-usage	crefvimdoc.txt	/*crvdoc-usage*
-cs	surround.txt	/*cs*
 disable-HTML-macros	HTML.txt	/*disable-HTML-macros*
 disable-HTML-mappings	HTML.txt	/*disable-HTML-mappings*
 drv-dtArrayInit	crefvim.txt	/*drv-dtArrayInit*
 drv-dtIncompleteArrayDecl	crefvim.txt	/*drv-dtIncompleteArrayDecl*
-ds	surround.txt	/*ds*
 ftp	pi_netrw.txt	/*ftp*
 g:do_xhtml_mappings	HTML.txt	/*g:do_xhtml_mappings*
 g:force_html_menu	HTML.txt	/*g:force_html_menu*
@@ -1755,8 +1754,6 @@ i_;tt	HTML.txt	/*i_;tt*
 i_;tx	HTML.txt	/*i_;tx*
 i_;ul	HTML.txt	/*i_;ul*
 i_;un	HTML.txt	/*i_;un*
-i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
-i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 i_html-<Tab>	HTML.txt	/*i_html-<Tab>*
 i_html-CTRL-I	HTML.txt	/*i_html-CTRL-I*
 i_html-tab	HTML.txt	/*i_html-tab*
@@ -1903,13 +1900,16 @@ netrw-xfer	pi_netrw.txt	/*netrw-xfer*
 netrw.vim	pi_netrw.txt	/*netrw.vim*
 network	pi_netrw.txt	/*network*
 omnicpp-download	omnicppcomplete.txt	/*omnicpp-download*
+omnicpp-faq	omnicppcomplete.txt	/*omnicpp-faq*
 omnicpp-features	omnicppcomplete.txt	/*omnicpp-features*
+omnicpp-history	omnicppcomplete.txt	/*omnicpp-history*
 omnicpp-installation	omnicppcomplete.txt	/*omnicpp-installation*
 omnicpp-limitations	omnicppcomplete.txt	/*omnicpp-limitations*
 omnicpp-may-complete	omnicppcomplete.txt	/*omnicpp-may-complete*
 omnicpp-options	omnicppcomplete.txt	/*omnicpp-options*
 omnicpp-overview	omnicppcomplete.txt	/*omnicpp-overview*
 omnicpp-popup	omnicppcomplete.txt	/*omnicpp-popup*
+omnicpp-thanks	omnicppcomplete.txt	/*omnicpp-thanks*
 omnicppcomplete	omnicppcomplete.txt	/*omnicppcomplete*
 omnicppcomplete.txt	omnicppcomplete.txt	/*omnicppcomplete.txt*
 op-opAsRightShift	crefvim.txt	/*op-opAsRightShift*
@@ -2362,14 +2362,6 @@ stlrefvim-intro	stlrefvim.txt	/*stlrefvim-intro*
 stlrefvim-license	stlrefvim.txt	/*stlrefvim-license*
 stlrefvim-usage	stlrefvim.txt	/*stlrefvim-usage*
 stlrefvim.txt	stlrefvim.txt	/*stlrefvim.txt*
-surround	surround.txt	/*surround*
-surround-author	surround.txt	/*surround-author*
-surround-customizing	surround.txt	/*surround-customizing*
-surround-issues	surround.txt	/*surround-issues*
-surround-mappings	surround.txt	/*surround-mappings*
-surround-replacements	surround.txt	/*surround-replacements*
-surround-targets	surround.txt	/*surround-targets*
-surround.txt	surround.txt	/*surround.txt*
 taglist-commands	taglist.txt	/*taglist-commands*
 taglist-debug	taglist.txt	/*taglist-debug*
 taglist-extend	taglist.txt	/*taglist-extend*
@@ -2498,7 +2490,6 @@ v_;un	HTML.txt	/*v_;un*
 v_html-<Tab>	HTML.txt	/*v_html-<Tab>*
 v_html-CTRL-I	HTML.txt	/*v_html-CTRL-I*
 v_html-tab	HTML.txt	/*v_html-tab*
-vs	surround.txt	/*vs*
 vtreeexplorer	vtreeexplorer.txt	/*vtreeexplorer*
 vtreeexplorer-?	vtreeexplorer.txt	/*vtreeexplorer-?*
 vtreeexplorer-C	vtreeexplorer.txt	/*vtreeexplorer-C*
@@ -2532,7 +2523,3 @@ xml-plugin-mappings	xml-plugin.txt	/*xml-plugin-mappings*
 xml-plugin-settings	xml-plugin.txt	/*xml-plugin-settings*
 xml-plugin.txt	xml-plugin.txt	/*xml-plugin.txt*
 xmledit.vim	xml-plugin.txt	/*xmledit.vim*
-yS	surround.txt	/*yS*
-ySS	surround.txt	/*ySS*
-ys	surround.txt	/*ys*
-yss	surround.txt	/*yss*
