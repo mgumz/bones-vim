@@ -111,10 +111,16 @@ if has("eval")
 endif
 
 " add some more tags for the omnicompletion
-set tags=./tags,tags,substitute(globpath(&rtp, "tags/*.tags"), "\n", ",", "g")
+let s:tagfiles = globpath(&rtp, "tags/*.tags")
+if ! empty(s:tagfiles)
+    let &tags="./tags,tags,".substitute(s:tagfiles,"\n",",", "g")
+endif
 let OmniCpp_ShowScopeInAbbr = 1
+let OmniCpp_ShowPrototypeInAbbr = 1
 let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteDot = 1
+let OmniCpp_SelectFirstItem = 0
+set completeopt+=longest
 
 
 " Enable modelines only on secure vim versions
