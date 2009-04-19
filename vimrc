@@ -111,10 +111,11 @@ if has("eval")
 endif
 
 " add some more tags for the omnicompletion
-let s:tagfiles = globpath(&rtp, "tags/*.tags")
-if ! empty(s:tagfiles)
-    let &tags="./tags,tags,".substitute(s:tagfiles,"\n",",", "g")
-endif
+let s:tfs=split(globpath(&rtp, "tags/*.tags"),"\n")
+for s:tf in s:tfs
+    let &tags.=",".expand(escape(escape(s:tf, " "), " "))
+endfor
+
 let OmniCpp_ShowScopeInAbbr = 1
 let OmniCpp_ShowPrototypeInAbbr = 1
 let OmniCpp_MayCompleteArrow = 1
