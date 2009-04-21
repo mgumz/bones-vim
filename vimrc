@@ -110,19 +110,13 @@ if has("eval")
     filetype indent on
 endif
 
-" add some more tags for the omnicompletion
+" add some more tags (mainly for omnicompletion)
 let s:tfs=split(globpath(&rtp, "tags/*.tags"),"\n")
 for s:tf in s:tfs
     let &tags.=",".expand(escape(escape(s:tf, " "), " "))
 endfor
 
-let OmniCpp_ShowScopeInAbbr = 1
-let OmniCpp_ShowPrototypeInAbbr = 1
-let OmniCpp_MayCompleteArrow = 1
-let OmniCpp_MayCompleteDot = 1
-let OmniCpp_SelectFirstItem = 0
 set completeopt+=longest
-
 
 " Enable modelines only on secure vim versions
 if (v:version == 603 && has("patch045")) || (v:version > 603)
@@ -168,9 +162,22 @@ let g:html_tag_case = 'lowercase'
 let g:no_html_toolbar = 'yes'
 let g:no_html_tab_mapping = 'yes'
 
+" omnicppcomplete
+let OmniCpp_ShowScopeInAbbr = 1
+let OmniCpp_ShowPrototypeInAbbr = 1
+let OmniCpp_MayCompleteArrow = 1
+let OmniCpp_MayCompleteDot = 1
+let OmniCpp_SelectFirstItem = 0
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+func! RecreateTags()
+    execute ":!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+endfunc
+map <C-F12> :call RecreateTags()<CR>
 
 " add a block
 func! AddBlock(style, nr)
