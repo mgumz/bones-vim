@@ -269,4 +269,4 @@ iab gce_ else {<cr>}<cr><Esc>kO
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " local stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-silent! source ~/.vim/vimrc.local
+execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
