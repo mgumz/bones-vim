@@ -110,6 +110,8 @@ if has("eval")
     filetype indent on
 endif
 
+" search upward for a 'tags' file
+let &tags="tags;./tags"
 " add some more tags (mainly for omnicompletion)
 let s:tfs=split(globpath(&rtp, "tags/*.tags"),"\n")
 for s:tf in s:tfs
