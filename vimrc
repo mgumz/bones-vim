@@ -171,6 +171,8 @@ let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteDot = 1
 let OmniCpp_SelectFirstItem = 0
 
+" calendar.vim
+let g:calendar_weeknm = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
