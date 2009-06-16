@@ -254,7 +254,8 @@ func! Indent()
 endfunc
 
 " insert date
-iab YMD <C-R>=strftime("%y%m%d %T")<CR>
+iab YMD <C-R>=strftime("%y%m%d")<CR>
+iab YMDt <C-R>=strftime("%y%m%d %T")<CR>
 iab YMDb <C-R>=strftime("%Y-%m-%d")<CR>
 
 " enter in commandmode will insert an enter (604)
