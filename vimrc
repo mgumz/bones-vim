@@ -110,6 +110,8 @@ if has("eval")
     filetype indent on
 endif
 
+" search upward for a 'tags' file
+let &tags="tags;./tags"
 " add some more tags (mainly for omnicompletion)
 let s:tfs=split(globpath(&rtp, "tags/*.tags"),"\n")
 for s:tf in s:tfs
@@ -169,6 +171,8 @@ let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteDot = 1
 let OmniCpp_SelectFirstItem = 0
 
+" calendar.vim
+let g:calendar_weeknm = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
@@ -250,7 +254,8 @@ func! Indent()
 endfunc
 
 " insert date
-iab YMD <C-R>=strftime("%y%m%d %T")<CR>
+iab YMD <C-R>=strftime("%y%m%d")<CR>
+iab YMDt <C-R>=strftime("%y%m%d %T")<CR>
 iab YMDb <C-R>=strftime("%Y-%m-%d")<CR>
 
 " enter in commandmode will insert an enter (604)
