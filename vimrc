@@ -253,23 +253,12 @@ func! Indent()
   execute "%!indent -nsaf -npcs -cli4 -i4 -lp -nprs -nsaw -nut -cbi4 -bli0 -bls -nbad -npsl -bl -bad -brz -cez -cdwz -brs"
 endfunc
 
-" insert date
-iab YMD <C-R>=strftime("%y%m%d")<CR>
-iab YMDt <C-R>=strftime("%y%m%d %T")<CR>
-iab YMDb <C-R>=strftime("%Y-%m-%d")<CR>
-
 " enter in commandmode will insert an enter (604)
 nmap <CR> _i<CR><ESC>
 
 " Make <space> in normal mode go down a page rather than left a
 " character
 noremap <space> <C-f>
-
-" create various c/c++ stuff on the fly
-iab gcm_ int main(int argc, char* argv[]) {<cr>xxx;<cr>return 0;<cr>}<cr><Esc>?xxx<cr>c$
-iab gcf_ int xxx( edit_parameters ) {<cr>}<Esc>?xxx<cr>cw
-iab gci_ if ( xxx ) {<cr><cr>}<Esc>?xxx<cr>cw
-iab gce_ else {<cr>}<cr><Esc>kO
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " local stuff
