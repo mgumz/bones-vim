@@ -1,15 +1,17 @@
+scriptencoding utf-8
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  author: mathias gumz
 "    file: vimrc
 "
 "   thanx: a _lot_ of stuff comes from ciaranm
 "
+"       http://github.com/ciaranm/dotfiles-ciaranm/tree/master
+"
 "   more helpful information:
 "
 "       http://items.sjbach.com/319/configuring-vim-right
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-scriptencoding utf-8
 
 if ($TERM == "rxvt-unicode") && (&termencoding == "")
     set termencoding=utf-8
