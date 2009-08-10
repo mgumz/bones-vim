@@ -128,7 +128,7 @@ else
 endif
 
 " runtime ftplugin/man.vim
-" runtime macros/matchit.vim
+runtime macros/matchit.vim
 " runtime plugin/a.vim
 let g:alternateExtensions_cc = "hh,HH"
 let g:alternateExtensions_hh = "cc,CC"
