@@ -120,6 +120,9 @@ for s:tf in s:tfs
     let &tags.=",".expand(escape(escape(s:tf, " "), " "))
 endfor
 
+
+set dir=$TEMP
+
 set completeopt+=longest
 
 " Enable modelines only on secure vim versions
