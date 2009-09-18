@@ -121,7 +121,7 @@ for s:tf in s:tfs
 endfor
 
 
-set dir=$TEMP
+set dir=$TEMP,~/tmp,/tmp
 
 set completeopt+=longest
 
