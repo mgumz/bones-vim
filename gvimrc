@@ -10,7 +10,7 @@ set guioptions=afgi
 
 set gcr=a:blinkwait1000-blinkon1000-blinkoff250
 
-colorscheme xoria256
+colorscheme lucius
 
 if has("gui_kde")
     set guifont=Consolas/13/-1/5/50/0/0/0/0/0
