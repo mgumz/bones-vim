@@ -28,7 +28,7 @@
 " believe, and shudder. But do you want to know, vain man, that
 " faith apart from works is dead?  (James 2:19,20 WEB)
 
-" Load Once: {{{1
+" Load Once: {{{1 
 if &cp || exists("g:loaded_cecutil")
  finish
 endif
