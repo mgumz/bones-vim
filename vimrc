@@ -184,7 +184,7 @@ let g:calendar_weeknm = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 func! RecreateTags()
-    execute ":!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+    execute ":silent !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
 endfunc
 map <C-F12> :call RecreateTags()<CR>
 
