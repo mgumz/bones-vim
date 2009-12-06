@@ -1,13 +1,17 @@
 " File Name: fluxkeys.vim
 " Maintainer: Mathias Gumz <akira at fluxbox dot org>
-" Original Date: 040127 00:40:33 
-" Last Update: 050624 11:20:25
+" Original Date: 040127
+" Changelog:
+"   * 091101 update to current fluxbox syntax (thanx to Harry Bullen)
+"   * 050624
 " Description: fluxbox key syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " quit when a syntax file was already loaded
 if exists("b:current_syntax")
     finish
 endif
+
+syntax case ignore
 
 syntax keyword fbActionNames ArrangeWindows  contained
 syntax keyword fbActionNames Bindkey  contained
@@ -25,9 +29,7 @@ syntax keyword fbActionNames FocusDown  contained
 syntax keyword fbActionNames FocusLeft  contained
 syntax keyword fbActionNames FocusRight  contained
 syntax keyword fbActionNames Fullscreen  contained
-syntax keyword fbActionNames HideRootMenu contained
-syntax keyword fbActionNames HideWorkspaceMenu contained
-syntax keyword fbActionNames HideWindowMenu contained
+syntax keyword fbActionNames HideMenus  contained
 syntax keyword fbActionNames Iconify  contained
 syntax keyword fbActionNames KillWindow  contained
 syntax keyword fbActionNames LeftWorkspace  contained
@@ -83,6 +85,7 @@ syntax keyword fbActionNames SetResourcevalueDialog  contained
 syntax keyword fbActionNames Shade  contained
 syntax keyword fbActionNames ShadeWindow  contained
 syntax keyword fbActionNames ShowDesktop  contained
+syntax keyword fbActionNames StartTabbing  contained
 syntax keyword fbActionNames Stick  contained
 syntax keyword fbActionNames StickWindow  contained
 syntax keyword fbActionNames Tab  contained
@@ -109,13 +112,14 @@ syntax keyword fbActionNames WorkspaceMenu  contained
 syntax keyword fbModifierNames Control Shift  contained
 syntax keyword fbModifierNames Mod1 Mod2 Mod3 Mod4 Mod5  contained
 syntax keyword fbModifierNames None  contained
+syntax keyword fbModifierNames OnDesktop OnToolbar OnTitlebar OnWindow contained
 
 " reference corners
 syntax keyword fbParameterNames UpperLeft Upper UpperRight contained
 syntax keyword fbParameterNames Left Right contained
 syntax keyword fbParameterNames LowerLeft Lower LowerRight contained
 " deiconfiy
-syntax keyword fbParameterNames LastWorkspace Last All OriginQuiet contained
+syntax keyword fbParameterNames LastWorkspace Last All AllWorkspace OriginQuiet contained
 
 " parameter numbers
 syntax match   fbParameterNumber /\([+-]\)*\d\+/ contained
