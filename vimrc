@@ -65,7 +65,7 @@ set scrolloff=3
 set visualbell vb
 set wildignore=*.o,*.bak,*.exe,*.so
 set wildmenu                                 "menu when tabcomplete
-set wildmode=list:longest
+set wildmode=list:longest,full
 set popt+=syntax:y                           "syntax when printing
 set lazyredraw
 
