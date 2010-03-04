@@ -179,6 +179,9 @@ let OmniCpp_SelectFirstItem = 0
 " calendar.vim
 let g:calendar_weeknm = 1
 
+" ragtag.vim
+let g:ragtag_global_maps = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
