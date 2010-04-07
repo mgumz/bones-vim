@@ -43,17 +43,20 @@ set smartcase
 " Show tabs and trailing whitespace visually
 if (&termencoding == "utf-8")
     if v:version >= 700
-        set list listchars=tab:»·,trail:·,extends:¿,nbsp:¿
+        set listchars=tab:»·,trail:·,extends:¿,nbsp:¿
     else
-        set list listchars=tab:»·,trail:·,extends:¿
+        set listchars=tab:»·,trail:·,extends:¿
     endif
 else
     if v:version >= 700
-        set list listchars=tab:>-,trail:.,extends:>,nbsp:_
+        set listchars=tab:>-,trail:.,extends:>,nbsp:_
     else
-        set list listchars=tab:>-,trail:.,extends:>
+        set listchars=tab:>-,trail:.,extends:>
     endif
 endif
+set list
+set nolinebreak
+set showbreak=+
 set nowrap
 set number
 set ruler
@@ -89,7 +92,7 @@ if filereadable(expand("$VIM/vimfiles/plugin/vimbuddy.vim"))
     set statusline+=\ %{VimBuddy()}          " vim buddy
 endif
 set statusline+=%=                           " right align
-set statusline+=0x%-8B\                      " current char
+set statusline+=%-b\ 0x%-8B\                " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
 "set dictionary=/usr/share/dict/words
