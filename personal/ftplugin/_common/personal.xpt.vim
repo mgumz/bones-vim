@@ -11,6 +11,13 @@ XPTemplate priority=personal
 " XPTvar $email        you have not yet set $email variable
 
 XPTemplateDef
-XPT yoursnippet " tips here
-bla bla
+XPT YMD
+`strftime("%Y%m%d")^
+
+XPT YMDt
+`strftime("%Y-%m-%d %T")^
+
+XPT YMDb
+`strftime("%Y-%m-%d")^
+
 

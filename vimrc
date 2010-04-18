@@ -172,12 +172,9 @@ let g:html_tag_case = 'lowercase'
 let g:no_html_toolbar = 'yes'
 let g:no_html_tab_mapping = 'yes'
 
-" omnicppcomplete
-let OmniCpp_ShowScopeInAbbr = 1
-let OmniCpp_ShowPrototypeInAbbr = 1
-let OmniCpp_MayCompleteArrow = 1
-let OmniCpp_MayCompleteDot = 1
-let OmniCpp_SelectFirstItem = 0
+" xptemplate.vim
+let g:xptemplate_brace_complete = 0
+let g:xptemplate_vars = '$autor=Mathias Gumz&$BRfun= &$SParg=&'
 
 " calendar.vim
 let g:calendar_weeknm = 1
