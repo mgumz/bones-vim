@@ -182,6 +182,10 @@ let g:calendar_weeknm = 1
 " ragtag.vim
 let g:ragtag_global_maps = 1
 
+" xptemplate.vim
+let g:xptemplate_brace_complete = 0
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
