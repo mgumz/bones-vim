@@ -51,6 +51,8 @@ unlet s:path
 unlet s:filename
 let g:XPTpvs = {}
 let g:XPTmappings = {
+      \ 'popup_old'     : "<C-v><C-v><BS><C-r>=XPTemplateStart(0,{'popupOnly':1})<cr>", 
+      \ 'trigger_old'   : "<C-v><C-v><BS><C-r>=XPTemplateStart(0)<cr>", 
       \ 'popup'         : "<C-r>=XPTemplateStart(0,{'popupOnly':1})<cr>", 
       \ 'trigger'       : "<C-r>=XPTemplateStart(0)<cr>", 
       \ 'wrapTrigger'   : "\"0s<C-r>=XPTemplatePreWrap(@0)<cr>", 
@@ -97,6 +99,7 @@ for ftAndBundle in s:bundle
     let g:xptBundle[ ft ][ bundle ] = 1
 endfor
 fun! g:XPTaddBundle(ft, bundle) 
+    call XPTemplateInit()
     let g:xptBundle[ a:ft ] = get( g:xptBundle, a:ft, {} )
     let g:xptBundle[ a:ft ][ a:bundle ] = 1
     call XPTembed( a:ft . '/' . a:bundle )
@@ -138,11 +141,11 @@ augroup XPTftInit
   au FileType * call XPTfiletypeInit()
 augroup END
 if g:xptemplate_brace_complete
-    inoremap <silent> ( <space><BS><C-r>=XPTtgr('(',{'noliteral':1,'k':'('})<cr>
-    inoremap <silent> [ <space><BS><C-r>=XPTtgr('[',{'noliteral':1,'k':'['})<cr>
-    inoremap <silent> { <space><BS><C-r>=XPTtgr('{',{'noliteral':1,'k':'{'})<cr>
-    inoremap <silent> ' <space><BS><C-r>=XPTtgr('''',{'noliteral':1,'k':''''})<cr>
-    inoremap <silent> " <space><BS><C-r>=XPTtgr('"',{'noliteral':1,'k':'"'})<cr>
+    inoremap <silent> ( <C-v><C-v><BS><C-r>=XPTtgr('(',{'noliteral':1,'k':'('})<cr>
+    inoremap <silent> [ <C-v><C-v><BS><C-r>=XPTtgr('[',{'noliteral':1,'k':'['})<cr>
+    inoremap <silent> { <C-v><C-v><BS><C-r>=XPTtgr('{',{'noliteral':1,'k':'{'})<cr>
+    inoremap <silent> ' <C-v><C-v><BS><C-r>=XPTtgr('''',{'noliteral':1,'k':''''})<cr>
+    inoremap <silent> " <C-v><C-v><BS><C-r>=XPTtgr('"',{'noliteral':1,'k':'"'})<cr>
 endif
 let bs=&bs
 if bs != 2 && bs !~ "start" 
