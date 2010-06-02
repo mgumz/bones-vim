@@ -11,8 +11,12 @@ XPTemplate priority=personal
 " XPTvar $email        you have not yet set $email variable
 
 XPTemplateDef
+
 XPT YMD
 `strftime("%Y%m%d")^
+
+XPT YMDs
+`strftime("%y%m%d")^
 
 XPT YMDt
 `strftime("%Y-%m-%d %T")^
