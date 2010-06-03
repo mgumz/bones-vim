@@ -266,7 +266,7 @@ func! Indent()
 endfunc
 
 " enter in commandmode will insert an enter (604)
-nmap <CR> _i<CR><ESC>
+nmap <CR> :call append(line('.')-1, '')<CR><ESC>
 
 " Make <space> in normal mode go down a page rather than left a
 " character
