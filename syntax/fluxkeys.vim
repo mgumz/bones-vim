@@ -13,6 +13,7 @@ endif
 
 syntax case ignore
 
+syntax keyword fbActionNames ActivateTab  contained
 syntax keyword fbActionNames ArrangeWindows  contained
 syntax keyword fbActionNames Bindkey  contained
 syntax keyword fbActionNames Close  contained
@@ -86,6 +87,8 @@ syntax keyword fbActionNames Shade  contained
 syntax keyword fbActionNames ShadeWindow  contained
 syntax keyword fbActionNames ShowDesktop  contained
 syntax keyword fbActionNames StartTabbing  contained
+syntax keyword fbActionNames StartMoving  contained
+syntax keyword fbActionNames StartResizing  contained
 syntax keyword fbActionNames Stick  contained
 syntax keyword fbActionNames StickWindow  contained
 syntax keyword fbActionNames Tab  contained
@@ -113,6 +116,8 @@ syntax keyword fbModifierNames Control Shift  contained
 syntax keyword fbModifierNames Mod1 Mod2 Mod3 Mod4 Mod5  contained
 syntax keyword fbModifierNames None  contained
 syntax keyword fbModifierNames OnDesktop OnToolbar OnTitlebar OnWindow contained
+syntax keyword fbModifierNames OnLeftGrip OnRightGrip OnWindowBorder contained
+
 
 " reference corners
 syntax keyword fbParameterNames UpperLeft Upper UpperRight contained
