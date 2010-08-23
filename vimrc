@@ -272,6 +272,12 @@ nmap <CR> :call append(line('.')-1, '')<CR><ESC>
 " character
 noremap <space> <C-f>
 
+if !exists("autocommands_loaded")
+    " http://superuser.com/questions/156248/disable-set-hlsearch-when-i-enter-insert-mode/156290#156290
+    autocmd InsertEnter * :setlocal nohlsearch
+    autocmd InsertLeave * :setlocal hlsearch
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " local stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
