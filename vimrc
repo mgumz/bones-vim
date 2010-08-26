@@ -193,6 +193,7 @@ let g:xptemplate_brace_complete = 0
 "  - add a 3rd party plugin by putting it into its own ~/.vim/3rd/NAME/
 "  - disable it temporary via 'touch ~/.vim/3rd/NAME/disable
 "  - remove it by .. removing ~/.vim/NAME :)
+"  - update 'helptags' by ':call Vim3rd_UpdateAllDocs()'
 "
 " add each 3rd party plugin to the runtimepath
 fun! Vim3rd_Add2RTP(path)
@@ -201,6 +202,7 @@ fun! Vim3rd_Add2RTP(path)
     endif
 endf
 
+" create the helptags for each plugin
 fun! Vim3rd_UpdateDocs(path)
     echo 'creating docs for '.a:path
     if isdirectory(a:path.'/doc')
@@ -208,6 +210,7 @@ fun! Vim3rd_UpdateDocs(path)
     endif
 endf
 
+" loop over all 3rd directories and call 'act'
 fun! Vim3rd_ForEachDo(act)
     let dirs=split(globpath(&rtp, '3rd/*'),'\n')
     for d in dirs
@@ -215,7 +218,12 @@ fun! Vim3rd_ForEachDo(act)
     endfor
 endf
 
-" activate all 3rd party plugins
+" convinience function
+fun! Vim3rd_UpdateAllDocs()
+    call Vim3rd_ForEachDo("Vim3rd_UpdateDocs")
+endf
+
+" activate all 3rd party plugins on startup
 call Vim3rd_ForEachDo('Vim3rd_Add2RTP')
 
 
