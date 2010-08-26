@@ -202,7 +202,8 @@ fun! Vim3rd_Add2RTP(path)
 endf
 
 fun! Vim3rd_UpdateDocs(path)
-    if filereadable(a:path.'/doc')
+    echo 'creating docs for '.a:path
+    if isdirectory(a:path.'/doc')
         exec 'helptags '.a:path.'/doc'
     endif
 endf
