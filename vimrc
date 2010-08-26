@@ -123,7 +123,6 @@ for s:tf in s:tfs
     let &tags.=",".expand(escape(escape(s:tf, " "), " "))
 endfor
 
-
 set dir=$TEMP,~/tmp,/tmp
 
 set completeopt+=longest
@@ -150,6 +149,7 @@ let use_xhtml=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugin - settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " taglist.vim
 
 map <unique> ,<F2> :TlistSync<CR>
@@ -189,7 +189,37 @@ let g:xptemplate_brace_complete = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" my little 'plugin manager'
+"  - add a 3rd party plugin by putting it into its own ~/.vim/3rd/NAME/
+"  - disable it temporary via 'touch ~/.vim/3rd/NAME/disable
+"  - remove it by .. removing ~/.vim/NAME :)
+"
+" add each 3rd party plugin to the runtimepath
+fun! Vim3rd_Add2RTP(path)
+    if !filereadable(a:path).'/disabled'
+        let &rtp.=",".a:path
+    endif
+endf
 
+fun! Vim3rd_UpdateDocs(path)
+    if filereadable(a:path.'/doc')
+        exec 'helptags '.a:path.'/doc'
+    endif
+endf
+
+fun! Vim3rd_ForEachDo(act)
+    let dirs=split(globpath(&rtp, '3rd/*'),'\n')
+    for d in dirs
+        exec 'call '.a:act.'("'.expand(escape(escape(d, ' '), ' ')).'")'
+    endfor
+endf
+
+" activate all 3rd party plugins
+call Vim3rd_ForEachDo('Vim3rd_Add2RTP')
+
+
+
+" recreate ctags
 func! RecreateTags()
     execute ":silent !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
 endfunc
