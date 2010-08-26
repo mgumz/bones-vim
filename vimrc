@@ -214,7 +214,7 @@ endf
 fun! Vim3rd_ForEachDo(act)
     let dirs=split(globpath(&rtp, '3rd/*'),'\n')
     for d in dirs
-        exec 'call '.a:act.'("'.expand(escape(escape(d, ' '), ' ')).'")'
+        exec 'call '.a:act.'("'.expand(escape(escape(d, ' \'), ' \')).'")'
     endfor
 endf
 
