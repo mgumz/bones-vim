@@ -189,7 +189,7 @@ let g:xptemplate_brace_complete = 0
 " my little 'plugin manager'
 "  - add a 3rd party plugin by putting it into its own ~/.vim/3rd/NAME/
 "  - disable it temporary via 'touch ~/.vim/3rd/NAME/disable
-"  - remove it by .. removing ~/.vim/NAME :)
+"  - remove it by .. removing ~/.vim/3rd/NAME :)
 "  - update 'helptags' by ':call Vim3rd_UpdateAllDocs()'
 "
 " add each 3rd party plugin to the runtimepath
