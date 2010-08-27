@@ -133,10 +133,6 @@ endif
 
 " runtime ftplugin/man.vim
 runtime macros/matchit.vim
-" runtime plugin/a.vim
-let g:alternateExtensions_cc = "hh,HH"
-let g:alternateExtensions_hh = "cc,CC"
-
 "settings for :TOhtml
 let html_number_lines=1
 let html_use_css=1
@@ -146,9 +142,11 @@ let use_xhtml=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugin - settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" runtime plugin/a.vim
+let g:alternateExtensions_cc = "hh,HH"
+let g:alternateExtensions_hh = "cc,CC"
 
 " taglist.vim
-
 map <unique> ,<F2> :TlistSync<CR>
 map <unique> <F2>  :Tlist<CR>
 let Tlist_Inc_Winwidth = 0
@@ -169,10 +167,6 @@ let g:html_tag_case = 'lowercase'
 let g:no_html_toolbar = 'yes'
 let g:no_html_tab_mapping = 'yes'
 
-" xptemplate.vim
-let g:xptemplate_brace_complete = 0
-let g:xptemplate_vars = '$autor=Mathias Gumz&$BRfun= &$SParg=&'
-
 " calendar.vim
 let g:calendar_weeknm = 1
 
@@ -180,6 +174,7 @@ let g:calendar_weeknm = 1
 let g:ragtag_global_maps = 1
 
 " xptemplate.vim
+let g:xptemplate_vars = '$autor=Mathias Gumz&$BRfun= &$SParg=&'
 let g:xptemplate_brace_complete = 0
 
 
