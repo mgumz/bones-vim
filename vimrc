@@ -194,7 +194,7 @@ let g:xptemplate_brace_complete = 0
 "
 " add each 3rd party plugin to the runtimepath
 fun! Vim3rd_Add2RTP(path)
-    if !filereadable(a:path).'/disabled'
+    if !filereadable(a:path.'/disabled')
         let &rtp.=",".a:path
     endif
 endf
