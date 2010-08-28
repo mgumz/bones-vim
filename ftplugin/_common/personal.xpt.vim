@@ -1,25 +1,31 @@
 XPTemplate priority=personal
 
+let s:f = g:XPTfuncs()
+
+fun! s:f._strftime(fmt) dict
+    return strftime(a:fmt)
+endfunction
+
 XPTemplateDef
 
 " - using 'strftime' directly would only get the value 
-"   on the first call of it. to avoid this: XSET
-" - `^ after `ymd^ allows to press <tab> to keep
-"   the created time
+"   on the first call of it. to avoid this: _strftime
 
 XPT YMD hint=date\ 'YYYYMMDD'
-XSET ymd=strftime("%Y%m%d")
-`ymd^`^
+`_strftime("%Y%m%d")^
 
 XPT YMDs hint=date\ 'YYMMDD'
-XSET ymds=strftime("%y%m%d")
-`ymds^`^
+`_strftime("%y%m%d")^
 
 XPT YMDt hint=date\ 'YYYY-MM-DD\ HH:MM:SS'
-XSET ymdt=strftime("%Y-%m-%d %T")
-`ymdt^`^
+`_strftime("%Y-%m-%d %T")^
 
 XPT YMDb hint=date\ 'YYYY-MM-DD'
-XSET ymdb=strftime("%Y-%m-%d")
-`ymdb^`^
+`_strftime("%Y-%m-%d")^
+
+
+
+" TODO snippets
+XPT nt hint=new\ task
+- [ ] `description^
 
