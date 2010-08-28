@@ -11,16 +11,16 @@ XPTemplateDef
 " - using 'strftime' directly would only get the value 
 "   on the first call of it. to avoid this: _strftime
 
-XPT YMD hint=date\ 'YYYYMMDD'
+XPT YMD abbr hint=date\ 'YYYYMMDD'
 `_strftime("%Y%m%d")^
 
-XPT YMDs hint=date\ 'YYMMDD'
+XPT YMDs abbr hint=date\ 'YYMMDD'
 `_strftime("%y%m%d")^
 
-XPT YMDt hint=date\ 'YYYY-MM-DD\ HH:MM:SS'
+XPT YMDt abbr hint=date\ 'YYYY-MM-DD\ HH:MM:SS'
 `_strftime("%Y-%m-%d %T")^
 
-XPT YMDb hint=date\ 'YYYY-MM-DD'
+XPT YMDb abbr hint=date\ 'YYYY-MM-DD'
 `_strftime("%Y-%m-%d")^
 
 
