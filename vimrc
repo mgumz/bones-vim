@@ -177,49 +177,12 @@ let g:ragtag_global_maps = 1
 let g:xptemplate_vars = '$autor=Mathias Gumz&$BRfun= &$SParg=&'
 let g:xptemplate_brace_complete = 0
 
+" 3rd.vim
+call v3rd#load_3rd_plugins()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" my little 'plugin manager'
-"  - add a 3rd party plugin by putting it into its own ~/.vim/3rd/NAME/
-"  - disable it temporary via 'touch ~/.vim/3rd/NAME/disable
-"  - remove it by .. removing ~/.vim/3rd/NAME :)
-"  - update 'helptags' by ':call Vim3rd_UpdateAllDocs()'
-"
-" add each 3rd party plugin to the runtimepath
-fun! Vim3rd_Add2RTP(path)
-    if !filereadable(a:path.'/disabled')
-        let &rtp.=",".a:path
-    endif
-endf
-
-" create the helptags for each plugin
-fun! Vim3rd_UpdateDocs(path)
-    echo 'creating docs for '.a:path
-    if isdirectory(a:path.'/doc')
-        exec 'helptags '.a:path.'/doc'
-    endif
-endf
-
-" loop over all 3rd directories and call 'act'
-fun! Vim3rd_ForEachDo(act)
-    let dirs=split(globpath(&rtp, '3rd/*'),'\n')
-    for d in dirs
-        exec 'call '.a:act.'("'.expand(escape(escape(d, ' \'), ' \')).'")'
-    endfor
-endf
-
-" convinience function
-fun! Vim3rd_UpdateAllDocs()
-    call Vim3rd_ForEachDo("Vim3rd_UpdateDocs")
-endf
-
-" activate all 3rd party plugins on startup
-call Vim3rd_ForEachDo('Vim3rd_Add2RTP')
-
-
-
 " recreate ctags
 func! RecreateTags()
     execute ":silent !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
