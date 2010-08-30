@@ -178,7 +178,7 @@ let g:xptemplate_vars = '$autor=Mathias Gumz&$BRfun= &$SParg=&'
 let g:xptemplate_brace_complete = 0
 
 " 3rd.vim
-call v3rd#load_3rd_plugins()
+call v3rd#load_plugins()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
