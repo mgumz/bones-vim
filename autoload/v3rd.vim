@@ -22,7 +22,7 @@ fun! s:for_each_do(dir, act)
 endf
 
 fun! s:add_2_rtp(path)
-    if !filereadable(a:path.s:v3rd_disabled)
+    if !filereadable(a:path.'/'.s:v3rd_disabled)
         let &rtp.=','.a:path
     endif
 endf
