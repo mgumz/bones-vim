@@ -17,7 +17,7 @@ let s:v3rd_disabled = 'disabled'
 fun! s:for_each_do(dir, act)
     let dirs=split(globpath(&rtp, a:dir.'/*'),'\n')
     for d in dirs
-        call {a:act}(expand(escape(escape(d, ' \'), ' \')))
+        call {a:act}(expand(escape(escape(d, ' \'), ' ')))
     endfor
 endf
 
@@ -28,8 +28,11 @@ fun! s:add_2_rtp(path)
 endf
 
 fun! s:update_docs(path)
-    echo 'creating docs for '.a:path
-    if isdirectory(a:path.'/doc') | exec 'helptags '.a:path.'/doc' | endif
+    let doc = a:path.'/doc'
+    if isdirectory(doc) 
+        echo 'creating docs for '.a:path
+        exec 'helptags '.doc
+    endif
 endf
 
 "-----------------------------------------------------"
