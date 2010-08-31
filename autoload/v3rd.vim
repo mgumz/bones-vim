@@ -1,7 +1,7 @@
 " v3rd.vim - v3rd party plugin management
-" Author:    Mathias Gumz <mathias gumz at gmail com>
-" Version:   1.0
-" Inspiration: pathogen.vim by Tim Pope
+" Author:       Mathias Gumz <mathias gumz at gmail com>
+" Version:      1.0
+" Inspiration:  pathogen.vim by Tim Pope
 " 
 "-----------------------------------------------------"
 
@@ -34,8 +34,10 @@ endf
 
 "-----------------------------------------------------"
 
-" a:1 - name of subfolder, default: '3rd'
-" a:2 - name of the file that disables loading a plugin, default: 'disabled'
+" a:1 - name of subfolder,
+"       default: '3rd'
+" a:2 - name of the file that disables loading a plugin, 
+"       default: 'disabled'
 fun! v3rd#load_plugins(...)
     if a:0 > 1 | let s:v3rd_disabled = a:2 | endif
     call s:for_each_do(a:0 ? a:1 : '3rd', 's:add_2_rtp')
