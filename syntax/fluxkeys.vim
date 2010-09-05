@@ -17,6 +17,7 @@ syntax keyword fbActionNames ActivateTab  contained
 syntax keyword fbActionNames ArrangeWindows  contained
 syntax keyword fbActionNames Bindkey  contained
 syntax keyword fbActionNames Close  contained
+syntax keyword fbActionNames ClientMenu  contained
 syntax keyword fbActionNames CommandDialog  contained
 syntax keyword fbActionNames Deiconify  contained
 syntax keyword fbActionNames DetachClient  contained
@@ -25,6 +26,7 @@ syntax keyword fbActionNames Exec  contained
 syntax keyword fbActionNames ExecCommand  contained
 syntax keyword fbActionNames Execute  contained
 syntax keyword fbActionNames Exit  contained
+syntax keyword fbActionNames Focus  contained
 syntax keyword fbActionNames FocusUp  contained
 syntax keyword fbActionNames FocusDown  contained
 syntax keyword fbActionNames FocusLeft  contained
@@ -86,15 +88,16 @@ syntax keyword fbActionNames SetResourcevalueDialog  contained
 syntax keyword fbActionNames Shade  contained
 syntax keyword fbActionNames ShadeWindow  contained
 syntax keyword fbActionNames ShowDesktop  contained
-syntax keyword fbActionNames StartTabbing  contained
 syntax keyword fbActionNames StartMoving  contained
 syntax keyword fbActionNames StartResizing  contained
+syntax keyword fbActionNames StartTabbing  contained
 syntax keyword fbActionNames Stick  contained
 syntax keyword fbActionNames StickWindow  contained
 syntax keyword fbActionNames Tab  contained
 syntax keyword fbActionNames TakeToWorkspace  contained
 syntax keyword fbActionNames TakeToNextWorkspace  contained
 syntax keyword fbActionNames TakeToPrevWorkspace  contained
+syntax keyword fbActionNames ToggleCmd  contained
 syntax keyword fbActionNames ToggleDecor  contained
 syntax keyword fbActionNames WindowMenu  contained
 syntax keyword fbActionNames Workspace  contained
@@ -115,14 +118,13 @@ syntax keyword fbActionNames WorkspaceMenu  contained
 syntax keyword fbModifierNames Control Shift  contained
 syntax keyword fbModifierNames Mod1 Mod2 Mod3 Mod4 Mod5  contained
 syntax keyword fbModifierNames None  contained
-syntax keyword fbModifierNames OnDesktop OnToolbar OnTitlebar OnWindow contained
-syntax keyword fbModifierNames OnLeftGrip OnRightGrip OnWindowBorder contained
-
+syntax keyword fbModifierNames OnDesktop OnToolbar OnTitlebar OnWindow OnWindowBorder OnLeftGrip OnRightGrip contained
 
 " reference corners
 syntax keyword fbParameterNames UpperLeft Upper UpperRight contained
 syntax keyword fbParameterNames Left Right contained
 syntax keyword fbParameterNames LowerLeft Lower LowerRight contained
+syntax keyword fbParameterNames NearestCorner contained
 " deiconfiy
 syntax keyword fbParameterNames LastWorkspace Last All AllWorkspace OriginQuiet contained
 
@@ -139,18 +141,27 @@ syntax match   fbAction /\w\+/ contained contains=fbActionNames nextgroup=fbPara
 syntax match   fbExecAction /Exec\(ute\|Command\)*\s\+.*$/ contained contains=fbActionNames
 
 " macro magic
-syntax region  fbMacroParameter start=/./ end=/.\{-\}}/ contained contains=fbParameterNames,fbParameterNumber
+syntax match   fbMacroParameter /.\{-\}}/ contained contains=fbParameterNames,fbParameterNumber
 syntax match   fbMacroAction /\w\+/ contained contains=fbActionNames nextgroup=fbMacroParameter
 syntax region  fbMacroExecAction start=/{Exec\(ute\|Command\)*\s\+/hs=s+1 end=/.\{-}}/he=e-1 contained contains=fbActionNames oneline
-syntax region  fbMacro start=/{/ end=/.\{-}}/ contained contains=fbMacroExecAction,fbMacroAction oneline nextgroup=fbMacro skipwhite
+syntax match   fbMacro /{.\{-}}/ contained contains=fbMacroExecAction,fbMacroAction nextgroup=fbMacro skipwhite
 syntax match   fbMacroStart /MacroCmd\s\+/ contained contains=fbActionNames nextgroup=fbMacro
+
+" toggle magic
+syntax match   fbToggleParameter /.\{-\}}/ contained contains=fbParameterNames,fbParameterNumber
+syntax match   fbToggleAction /\w\+/ contained contains=fbActionNames nextgroup=fbToggleParameter
+syntax region  fbToggleExecAction start=/{Exec\(ute\|Command\)*\s\+/hs=s+1 end=/.\{-}}/he=e-1 contained contains=fbActionNames oneline
+syntax match   fbToggleError /.$/ contained skipwhite
+syntax match   fbToggle2 /{.\{-}}/ contained contains=fbToggleExecAction,fbToggleAction nextgroup=fbToggleError skipwhite
+syntax match   fbToggle1 /{.\{-}}/ contained contains=fbToggleExecAction,fbToggleAction nextgroup=fbToggle2 skipwhite
+syntax match   fbToggleStart /ToggleCmd\s\+/ contained contains=fbActionNames nextgroup=fbToggle1 skipwhite
 
 " anything but a valid modifier is colored Error
 syntax match   fbKeyStart /^\w\+/  contained contains=fbModifierNames
 
 " anything but a comment or a valid key line is colored Error
 syntax match   fbNoKeyline /.\+$/ display skipwhite
-syntax region  fbKeys start=/\w\+/ end=/.\{-}:/he=e-1 contains=fbKeyStart,fbModifierNames nextgroup=fbMacroStart,fbExecAction,fbAction oneline
+syntax region  fbKeys start=/\w\+/ end=/.\{-}:/he=e-1 contains=fbKeyStart,fbModifierNames nextgroup=fbMacroStart,fbToggleStart,fbExecAction,fbAction oneline
 syntax match   fbComment /[#!].*$/ display 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -159,11 +170,13 @@ syntax match   fbComment /[#!].*$/ display
 highlight link fbNoKeyline Error
 highlight link fbAction Error
 highlight link fbKeyStart Error
+highlight link fbToggleError Error
 
 highlight link fbComment Comment
 highlight link fbKeys Number
 highlight link fbExecAction String
 highlight link fbMacroExecAction String
+highlight link fbToggleExecAction String
 highlight link fbActionNames Type 
 highlight link fbModifierNames Macro
 highlight link fbParameter Number
@@ -173,4 +186,3 @@ highlight link fbParameterNumber Conditional
 syntax sync fromstart
 
 let b:current_syntax = 'fluxkeys'
-
