@@ -177,6 +177,9 @@ let g:ragtag_global_maps = 1
 let g:xptemplate_vars = '$autor=Mathias Gumz&$BRfun= &$SParg=&'
 let g:xptemplate_brace_complete = 0
 
+" scrollfix.vim
+let g:scrollfix=-1 "disabled for normal work
+
 " pathogen.vim
 call pathogen#runtime_append_all_bundles('3rd', 'disabled')
 
