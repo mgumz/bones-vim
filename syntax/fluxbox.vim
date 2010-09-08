@@ -14,7 +14,8 @@ syntax keyword fluxboxAction exec stylesdir exit restart reconfig nop style cont
 syntax keyword fluxboxPreProc include commanddialog
 syntax region fluxboxType matchgroup=fbSqBrackets start=/\[/ end=/\]/ contains=fluxboxAction,fluxboxMenu,fluxboxPreProc nextgroup=fluxboxHeader skipwhite oneline
 syntax region fluxboxHeader matchgroup=fbRdBrackets start=/(/ end=/)/ contained nextgroup=fluxboxCommand skipwhite oneline
-syntax region fluxboxCommand matchgroup=fbClBrackets start=/{/ end=/}/ contained oneline contains=fluxboxParam
+syntax region fluxboxCommand matchgroup=fbClBrackets start=/{/ end=/}/ contained oneline contains=fluxboxParam skipwhite nextgroup=fluxboxIcon
+syntax region fluxboxIcon matchgroup=fbIcBrackets start=/</ end=/>/ contained oneline
 syntax region fluxboxFold fold start=/\[submenu\]/ start=/\[begin\]/ end=/\[end\]/ contains=TOP keepend extend transparent
 syntax match fluxboxComment /#.*$/
 syntax match fluxboxParam / [^}]*/ contained display
@@ -26,8 +27,8 @@ highlight link fluxboxCommand Statement
 highlight link fluxboxPreProc PreProc
 highlight link fluxboxComment Comment
 highlight link fluxboxParam Constant
+highlight link fluxboxIcon Number
 setlocal foldmethod=syntax
 syntax sync fromstart
 
-let b:current_syntax = 'fluxbox'
-
+let b:current_syntax = 'fluxmenu'
