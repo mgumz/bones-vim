@@ -27,6 +27,7 @@ endif
 set background=dark
 set nocompatible
 set cpoptions+=$
+
 set cindent
 autocmd BufRead,BufNewFile *.txt setlocal nocindent
 
@@ -37,6 +38,11 @@ set expandtab
 
 set hidden
 set hlsearch
+if !exists("autocommands_loaded")
+    " http://superuser.com/questions/156248/disable-set-hlsearch-when-i-enter-insert-mode/156290#156290
+    autocmd InsertEnter * :setlocal nohlsearch
+    autocmd InsertLeave * :setlocal hlsearch
+endif
 set incsearch
 set ignorecase
 set smartcase
@@ -90,18 +96,13 @@ set statusline+=\[%{strlen(&ft)?&ft:'none'}, " filetype
 set statusline+=%{&encoding},                " encoding
 set statusline+=%{&fileformat}]              " file format
 set statusline+=%=                           " right align
-set statusline+=%-b\ 0x%-8B\                " current char
+set statusline+=%-b\ 0x%-8B\                 " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
 "set dictionary=/usr/share/dict/words
 
-" If possible, try to use a narrow number column.
-if v:version >= 700
-    try
-        setlocal numberwidth=3
-    catch
-    endtry
-endif
+" if possible, try to use a narrow number column.
+if v:version >= 700 && exists('+linebreak') | set numberwidth=3 | endif
 
 if has("syntax")
     syntax on
@@ -270,11 +271,6 @@ nmap <CR> :call append(line('.')-1, '')<CR><ESC>
 " character
 noremap <space> <C-f>
 
-if !exists("autocommands_loaded")
-    " http://superuser.com/questions/156248/disable-set-hlsearch-when-i-enter-insert-mode/156290#156290
-    autocmd InsertEnter * :setlocal nohlsearch
-    autocmd InsertLeave * :setlocal hlsearch
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " local stuff
