@@ -28,6 +28,7 @@ set background=dark
 set nocompatible
 set cpoptions+=$
 set cindent
+autocmd BufRead,BufNewFile *.txt setlocal nocindent
 
 " disable cindet for all .txt files
 autocmd BufRead *.txt set nocindent
