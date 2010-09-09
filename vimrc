@@ -31,8 +31,8 @@ set cpoptions+=$
 set cindent
 autocmd BufRead,BufNewFile *.txt setlocal nocindent
 
-" disable cindet for all .txt files
-autocmd BufRead *.txt set nocindent
+
+if exists('+shellslash') | set shellslash | endif
 
 set expandtab
 
