@@ -30,6 +30,7 @@ set cpoptions+=$
 
 set cindent
 autocmd BufRead,BufNewFile *.txt setlocal nocindent
+autocmd BufRead,BufNewFile * if &ft == 'changelog' | setlocal nocindent | endif
 
 
 if exists('+shellslash') | set shellslash | endif
