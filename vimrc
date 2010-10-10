@@ -141,6 +141,10 @@ let html_number_lines=1
 let html_use_css=1
 let use_xhtml=1
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" local stuff
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugin - settings
@@ -184,7 +188,7 @@ let g:xptemplate_brace_complete = 0
 let g:scrollfix=-1 "disabled for normal work
 
 " pathogen.vim
-call pathogen#runtime_append_all_bundles('3rd', 'disabled')
+call pathogen#runtime_append_all_bundles('3rd')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
@@ -273,7 +277,4 @@ nmap <CR> :call append(line('.')-1, '')<CR><ESC>
 noremap <space> <C-f>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" local stuff
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
+
