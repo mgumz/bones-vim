@@ -1,3 +1,4 @@
 doc/tags
 spell/.*\.add
+3rd/cream
 .hgignore
