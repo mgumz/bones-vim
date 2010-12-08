@@ -1,4 +1,5 @@
 doc/tags
 spell/.*\.add
 3rd/cream
+3rd/vim-faq
 .hgignore
