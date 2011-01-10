@@ -31,10 +31,10 @@ set cpoptions+=$
 set cindent
 autocmd BufRead,BufNewFile *.txt setlocal nocindent
 autocmd BufRead,BufNewFile * if &ft == 'changelog' | setlocal nocindent | endif
-autocmd BufRead,BufNewFile *.fo setlocal encoding=utf8
 
 if exists('+shellslash') | set shellslash | endif
 
+set encoding=utf-8
 set expandtab
 
 set hidden
