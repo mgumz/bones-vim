@@ -80,7 +80,7 @@ set wildmode=list:longest,full
 set popt+=syntax:y                           "syntax when printing
 set lazyredraw
 
-" dunno why but checking for 
+" dunno why but checking for
 "    has("netbeans_intg") || has("sun_workshop")
 " doesnt work on MacVim
 try
