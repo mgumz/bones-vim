@@ -272,7 +272,10 @@ endfunc
 " enter in commandmode will insert an enter (604)
 nmap <CR> :call append(line('.')-1, '')<CR><ESC>
 
-" Make <space> in normal mode go down a page rather than left a
+
+map <unique> <C-F1> :set number!<ESC>
+
+" Make <space> in normal mode go down a page rather than insert a
 " character
 noremap <space> <C-f>
 
