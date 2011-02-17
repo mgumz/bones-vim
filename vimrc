@@ -115,6 +115,10 @@ if has("eval")
     filetype indent on
 endif
 
+if has("digraphs")
+    digraph ., 8230  " ellipsis (¿)
+endif
+
 " search upward for a 'tags' file
 let &tags="tags;./tags"
 " add some more tags (mainly for omnicompletion)
