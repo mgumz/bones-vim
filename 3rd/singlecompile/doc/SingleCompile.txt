@@ -1,9 +1,9 @@
 *SingleCompile.txt*
 
 File: SingleCompile.txt
-Version: 2.3.4
+Version: 2.6
 Author and Current Main Maintainer: H Xu <xuhdev@gmail.com>
-Last Change: 7 February 2011
+Last Change: 19 March 2011
 Description: Make it more convenient to compile or run a single source file.
 License: You can redistribute this plugin and/or modify it under the terms 
          of the GNU General Public License as published by the Free Software 
@@ -40,22 +40,29 @@ Add these key-mappings to your vimrc:
  nmap <F10> :SCCompileRun<cr>
 <
 If your file type is supported, then press F9 to compile your source file, and
-press F10 to compile and run your source file. You may also use
-":SCChooseCompiler" command to choose a compiler if you have more than one
-kind of compiler available on you system. 
+press F10 to compile and run your source file. If there is a compilation
+error, and the |quickfix| feature is enabled, then you could use |:cope|
+command to see the error list. You may also use ":SCChooseCompiler" command to
+choose a compiler if you have more than one kind of compiler available on you
+system.  ":SCViewResult" will show you the last run result.
 
 
 Features:
-1. Compile or run the source file quickly using quickfix feature of vim;
+1. Compile or run the source file quickly using |quickfix| feature and
+   |compiler| feature of vim;
 2. Compilers and interpreters auto detecting;
 3. Fast switch between several installed compilers or interpreters;
 4. Multi-language support;
-5. Custom your own compiler/interpreter template.
+5. Custom your own compiler/interpreter template;
+6. View the result of last run command at any time(requires "tee" command).
 
 
 Here is a list of built-in supported compilers or interpreter(For some
-compilers, you need to set the environment varibles correctly to make them
-available for SingleCompile):
+compilers/interpreters, you need to set the environment varibles correctly to
+make them available for SingleCompile):
+
+bash:
+    bash (Bourne-Again Shell)
 
 C:
     bcc (Borland C++ Builder), Windows only
@@ -84,6 +91,10 @@ C++:
     open64 (Open64 C++ Compiler), UNIX only
     sol-studio (Sun C++ Compiler(Sun Solaris Studio)), UNIX only
 
+C#:
+    msvcs(Microsoft Visual C#), Windows Only
+    mono (Mono C# compiler)
+
 cmake:
     cmake (cmake)
 
@@ -99,8 +110,9 @@ dos batch:
     
 Fortran:
     ftn95 (Silverfrost FTN95), Windows only
-    gfortran (GNU Fortran Compiler)
     g77 (GNU Fortran 77 Compiler)
+    g95 (G95)
+    gfortran (GNU Fortran Compiler)
     ifort (Intel Fortran Compiler)
     open-watcom (Open Watcom Fortran 77/32 Compiler)
     open64-f90 (Open64 Fortran 90 Compiler), UNIX only
@@ -125,6 +137,9 @@ Java:
 
 JavaScript:
     rhino (Rhino)
+
+ksh:
+    ksh (Korn Shell)
 
 LaTeX:
     miktex (MiKTeX), Windows Only
@@ -166,6 +181,9 @@ sh:
     ksh (Korn Shell)
     sh (Bourne Shell)
     zsh (Z Shell)
+
+tcl:
+    tclsh (Simple shell containing Tcl interpreter)
 
 tcsh:
     tcsh (TENEX C Shell)
@@ -297,42 +315,27 @@ additional "-O2" flag and run the output binary file:
 Commands:
     :SCChooseCompiler
 Choose a compiler to use. This command will display a list of compilers for
-you to choose one.
+you to choose one. If you want to set a default compiler in your vimrc, please
+use the function SingleCompile#ChooseCompiler. See
+|SingleCompile-use-built-in-template|.
 
                                             *:SCChooseInterpreter*
 Commands:
     :SCChooseInterpreter
 Same as |:SCChooseCompiler|.
 
+                                            *:SCViewResult*
+Commands:
+    :SCViewResult 
+View the result of the last run command. Only valid when "tee" command is
+available.  "tee" is usually available on a UNIX system. If you are under
+Windows, install cygwin or visit the following link to download a "tee"
+command for Windows:
+http://gnuwin32.sourceforge.net/packages/coreutils.htm
+
 SETTINGS~
                                             *SingleCompile-settings*
 ----------------------------------------------------------------------------
-
-                                            *SingleCompile-autowrite*
-If you don't want to save your file automatically when you use "SingleCompile"
-command or "SingleCompileRun" command, add the following line to your vimrc:
->
- let g:SingleCompile_autowrite = 0
-<
-NOTE: If you let g:SingleCompile_usequickfix=1, this option will take no
-effect, the running result will depend on the vim's option 'autowrite'. See
-'autowrite' for more information.
-
-                                            *SingleCompile-usedialog*
-If you want SingleCompile to show message in a dialog, add the
-following line to your vimrc:
->
- let g:SingleCompile_usedialog = 1
-<
-This setting will take no effect if your vim is not compiled with
-'+dialog_con' and '+dialog_gui'.
-
-                                            *SingleCompile-usequickfix*
-If you don't want SingleCompile to use quickfix feature, add the following
-line to your vimrc:
->
- let g:SingleCompile_usequickfix = 0
-<
 
                                             *SingleCompile-alwayscompile*
 If g:SingleCompile_alwayscompile is set to 0, when using |:SCCompileRun|
@@ -343,6 +346,16 @@ want to enable this feature, add the following line to your vimrc:
  let g:SingleCompile_alwayscompile = 0
 <
 The default value of g:SingleCompile_alwayscompile is 1.
+
+                                            *SingleCompile-autowrite*
+If you don't want to save your file automatically when you use "SingleCompile"
+command or "SingleCompileRun" command, add the following line to your vimrc:
+>
+ let g:SingleCompile_autowrite = 0
+<
+NOTE: If you let g:SingleCompile_usequickfix=1, this option will take no
+effect, the running result will depend on the vim's option 'autowrite'. See
+'autowrite' for more information.
 
                                             *SingleCompile-menumode*
 If you don't want the menus of SingleCompile to show, copy the following line
@@ -361,6 +374,41 @@ following line to your vimrc:
  let g:SingleCompile_menumode = 2
 <
 The default value is 1.
+
+                                            *SingleCompile-resultheight*
+g:SingleCompile_resultheight is the height of the result displaying window
+triggered by |:SCViewResult| command. To set the value, add the following line
+to your vimrc file:
+>
+ let g:SingleCompile_resultheight = a_number
+<
+Replace a_number to any number you want, such as "10", "4". The default value
+of g:SingleCompile_resultheight is 5.
+
+                                            *SingleCompile-showquickfixiferror*
+If |quickfix| is enabled and used, and you want the quickfix window to show
+automatically if there is a compilation error, then add the following line to
+your vimrc file:
+>
+ let g:SingleCompile_showquickfixiferror = 1
+<
+The default value of g:SingleCompile_showquickfixiferror is 0.
+
+                                            *SingleCompile-usedialog*
+If you want SingleCompile to show message in a dialog, add the
+following line to your vimrc:
+>
+ let g:SingleCompile_usedialog = 1
+<
+This setting will take no effect if your vim is not compiled with
+'+dialog_con' and '+dialog_gui'.
+
+                                            *SingleCompile-usequickfix*
+If you don't want SingleCompile to use quickfix feature, add the following
+line to your vimrc:
+>
+ let g:SingleCompile_usequickfix = 0
+<
 
 KEY-MAPPING~
                                             *SingleCompile-key-mapping*
@@ -526,8 +574,11 @@ compilation command of java to "javac".
 
                                             *SingleCompile-built-in-compiler*
 The following compilers have built-in support in this plugin (For some
-compilers, you need to set the environment varibles correctly to make them
-available for SingleCompile):
+compilers/interpreters, you need to set the environment varibles correctly to
+make them available for SingleCompile):
+
+bash:
+    bash (Bourne-Again Shell)
 
 C:
     bcc (Borland C++ Builder), Windows only
@@ -556,6 +607,10 @@ C++:
     open64 (Open64 C++ Compiler), UNIX only
     sol-studio (Sun C++ Compiler(Sun Solaris Studio)), UNIX only
 
+C#:
+    msvcs(Microsoft Visual C#), Windows Only
+    mono (Mono C# compiler)
+
 cmake:
     cmake (cmake)
 
@@ -571,8 +626,9 @@ dos batch:
     
 Fortran:
     ftn95 (Silverfrost FTN95), Windows only
-    gfortran (GNU Fortran Compiler)
     g77 (GNU Fortran 77 Compiler)
+    g95 (G95)
+    gfortran (GNU Fortran Compiler)
     ifort (Intel Fortran Compiler)
     open-watcom (Open Watcom Fortran 77/32 Compiler)
     open64-f90 (Open64 Fortran 90 Compiler), UNIX only
@@ -597,6 +653,9 @@ Java:
 
 JavaScript:
     rhino (Rhino)
+
+ksh:
+    ksh (Korn Shell)
 
 LaTeX:
     miktex (MiKTeX), Windows Only
@@ -638,6 +697,9 @@ sh:
     ksh (Korn Shell)
     sh (Bourne Shell)
     zsh (Z Shell)
+
+tcl:
+    tclsh (Simple shell containing Tcl interpreter)
 
 tcsh:
     tcsh (TENEX C Shell)
@@ -774,6 +836,21 @@ corresponding language and compiler.
 To make it less confusing, I better explain the calling order here. The
 calling order is: first the compiler detecting function, then "Predo"
 function, then compile, and the last is the "Postdo" function.
+
+                                            *SingleCompile-vim-compiler*
+SingleCompile can work with the compiler feature of vim(see |:compiler|). To
+set the compiler file in the compiler direcotry for a compiler, use
+SingleCompile#SetVimCompiler function. For example, for g77, the GNU Fortran
+77 compiler, use the following line to set the compiler file for g77:
+>
+ call SingleCompile#SetVimCompiler('fortran', 'g77', 'fortran_g77')
+<
+(This line is excerpted from the built-in templates.)
+
+Then if we are using g77 as our compiler, SingleCompile will first execute
+":compiler fortran_g77" before compiling the source file. This will give us
+the advantage that vim's quickfix will recognize the messages output by g77
+and help us locate these errors quickly.
 
 CREDITS~
                                             *SingleCompile-credits*
