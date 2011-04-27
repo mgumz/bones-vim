@@ -191,6 +191,11 @@ let g:xptemplate_brace_complete = 0
 " scrollfix.vim
 let g:scrollfix=-1 "disabled for normal work
 
+" pydoc.vim
+if has('win32') || has('win64')
+    let g:pydoc_cmd = 'python -m pydoc'
+endif
+
 " pathogen.vim
 call pathogen#runtime_append_all_bundles('3rd')
 
