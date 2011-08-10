@@ -197,7 +197,7 @@ if has('win32') || has('win64')
 endif
 
 " pathogen.vim
-call pathogen#runtime_append_all_bundles('3rd')
+call pathogen#infect('3rd')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
