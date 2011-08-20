@@ -204,7 +204,11 @@ call pathogen#infect('3rd')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " recreate ctags
 func! RecreateTags()
-    execute ":silent !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+    if &filetype == 'c' || &filetype == 'cpp'
+        execute ':silent !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .'
+    elseif &filetype == 'php'
+        execute ':silent !ctags -R --PHP-kinds=+cf --tag-relative=yes --totals=yes .'
+    endif
 endfunc
 map <C-F12> :call RecreateTags()<CR>
 
