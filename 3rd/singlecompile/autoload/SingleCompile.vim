@@ -1,5 +1,22 @@
+" Copyright (C) 2010-2012 Hong Xu
+
+" This file is part of SingleCompile.
+
+" SingleCompile is free software: you can redistribute it and/or modify
+" it under the terms of the GNU General Public License as published by
+" the Free Software Foundation, either version 3 of the License, or
+" (at your option) any later version.
+
+" SingleCompile is distributed in the hope that it will be useful,
+" but WITHOUT ANY WARRANTY; without even the implied warranty of
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+" GNU General Public License for more details.
+
+" You should have received a copy of the GNU General Public License
+" along with SingleCompile.  If not, see <http://www.gnu.org/licenses/>.
+
 " File: autoload/SingleCompile.vim
-" Version: 2.9.1
+" Version: 2.9.3
 " check doc/SingleCompile.txt for more information
 
 
@@ -48,7 +65,7 @@ let s:run_result_tempfile = ''
 
 
 function! SingleCompile#GetVersion() " get the script version {{{1
-    return 291
+    return 293
 endfunction
 
 " util {{{1
@@ -548,7 +565,7 @@ function! s:Initialize() "{{{1
                     \ 'vim-compiler' : 'msvc'})
         call SingleCompile#SetCompilerTemplate('c', 'bcc', 
                     \'Borland C++ Builder', 'bcc32', 
-                    \'-o $(FILE_TITLE)$', l:common_run_command)
+                    \'-o$(FILE_TITLE)$', l:common_run_command)
         call SingleCompile#SetOutfile('c', 'bcc', l:common_out_file)
     endif
     call SingleCompile#SetCompilerTemplate('c', 'gcc', 'GNU C Compiler',
@@ -656,7 +673,7 @@ function! s:Initialize() "{{{1
                     \ 'priority' : 13,
                     \ 'vim-compiler' : 'msvc'})
         call SingleCompile#SetCompilerTemplate('cpp', 'bcc', 
-                    \'Borland C++ Builder','bcc32', '-o $(FILE_TITLE)$', 
+                    \'Borland C++ Builder','bcc32', '-o$(FILE_TITLE)$', 
                     \l:common_run_command)
         call SingleCompile#SetOutfile('cpp', 'bcc', l:common_out_file)
     endif
@@ -872,6 +889,9 @@ function! s:Initialize() "{{{1
     call SingleCompile#SetOutfile('java', 'gcj', '$(FILE_TITLE)$'.'.class')
 
     " javascript
+    call SingleCompile#SetCompilerTemplate('javascript', 'gjs',
+                \'Javascript Bindings for GNOME', 'gjs', '', '')
+    call SingleCompile#SetPriority('javascript', 'gjs', 120)
     call SingleCompile#SetCompilerTemplate('javascript', 'js',
                 \'SpiderMonkey, a JavaScript engine written in C',
                 \'js', '', '')
@@ -888,17 +908,22 @@ function! s:Initialize() "{{{1
         call SingleCompile#SetCompilerTemplate('tex', 'pdflatex', 'pdfLaTeX',
                     \'pdflatex', '-interaction=nonstopmode',
                     \'xdg-open "$(FILE_TITLE)$.pdf"')
-        call SingleCompile#SetCompilerTemplate('tex', 'latex', 'LaTeX',
-                    \'latex', '-interaction=nonstopmode',
-                    \'xdg-open "$(FILE_TITLE)$.dvi"')
     elseif has('win32')
         call SingleCompile#SetCompilerTemplate('tex', 'pdflatex', 'pdfLaTeX',
                     \'pdflatex', '-interaction=nonstopmode',
                     \'open "$(FILE_TITLE)$.pdf"')
+    endif
+    call SingleCompile#SetPriority('tex', 'pdflatex', 50)
+    if has('unix')
+        call SingleCompile#SetCompilerTemplate('tex', 'latex', 'LaTeX',
+                    \'latex', '-interaction=nonstopmode',
+                    \'xdg-open "$(FILE_TITLE)$.dvi"')
+    elseif has('win32')
         call SingleCompile#SetCompilerTemplate('tex', 'latex', 'LaTeX',
                     \'latex', '-interaction=nonstopmode',
                     \'open "$(FILE_TITLE)$.dvi"')
     endif
+    call SingleCompile#SetPriority('tex', 'latex', 80)
 
     " lisp
     call SingleCompile#SetCompilerTemplate('lisp', 'clisp', 'GNU CLISP',
@@ -1097,7 +1122,7 @@ function! SingleCompile#SetCompilerTemplateByDict(
     " settings functions below one by one is not needed.
 
     let l:key_list = ['name', 'detect_func_arg', 'flags', 'run',
-                \'detect_func', 'pre-do', 'post-do', 'out-file',
+                \'detect_func', 'pre-do', 'priority', 'post-do', 'out-file',
                 \'vim-compiler']
 
     for key in l:key_list
