@@ -4,3 +4,4 @@ spell/.*\.add
 3rd/vim-faq
 .hgignore
 vimrc.local
+.*\.pyc
