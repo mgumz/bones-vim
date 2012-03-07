@@ -80,14 +80,6 @@ set wildmode=list:longest,full
 set popt+=syntax:y                           "syntax when printing
 set lazyredraw
 
-" dunno why but checking for
-"    has("netbeans_intg") || has("sun_workshop")
-" doesnt work on MacVim
-try
-    set autochdir
-catch
-endtry
-
 set laststatus=2
 set statusline=
 set statusline+=%-3.3n\                      " buffer number
@@ -291,6 +283,5 @@ map <unique> <C-F1> :set number!<ESC>
 " Make <space> in normal mode go down a page rather than insert a
 " character
 noremap <space> <C-f>
-
-
+nnoremap ,cd :cd %:p:h<CR>
 
