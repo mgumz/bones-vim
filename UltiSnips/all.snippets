@@ -1,7 +1,21 @@
-snippet YMD "year-month-day" i
+snippet YMD "yyyymmdd" i
+`!v strftime("%Y%m%d")` 
+endsnippet
+
+snippet YMDs "yymmdd" i
+`!v strftime("%y%m%d")` 
+endsnippet
+
+snippet YMDb "yyyy-mm-dd" i
 `!v strftime("%Y-%m-%d")` 
 endsnippet
 
-snippet YMDb "year-month-day time" i
+snippet YMDt "yyyy-mm-dd hh:ss:mm" i
 `!v strftime("%Y-%m-%d %X")` 
+endsnippet
+
+
+
+snippet nt "new task" i
+- [ ] ${1:task description}
 endsnippet
