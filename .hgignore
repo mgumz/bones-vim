@@ -5,3 +5,4 @@ spell/.*\.add
 .hgignore
 vimrc.local
 .*\.pyc
+tags/.*\.tags
