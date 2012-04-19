@@ -72,6 +72,9 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set textwidth=78
+if exists('+cc')  " colorcolumn
+    set cc=+1
+endif
 set scrolloff=3
 set visualbell vb
 set wildignore=*.o,*.bak,*.exe,*.so
