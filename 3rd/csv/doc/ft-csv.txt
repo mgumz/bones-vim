@@ -1,7 +1,7 @@
-*ft-csv.txt*	For Vim version 7.3	Last Change: Sun, 25 Mar 2012
+*ft-csv.txt*	For Vim version 7.3	Last Change: Wed, 25 Jul 2012
 
 Author:		Christian Brabandt <cb@256bit.org>
-Version:	0.23
+Version:	0.26
 Homepage:	http://www.vim.org/scripts/script.php?script_id=2830
 
 The VIM LICENSE applies to the CSV filetype plugin (see |copyright|).
@@ -32,6 +32,8 @@ NO WARRANTY, EXPRESS OR IMPLIED.  USE AT-YOUR-OWN-RISK.
     3.19 Dynamic filters........................|csv-filter|
     3.20 Analyze a column.......................|csv-analyze|
     3.21 Vertical Folding.......................|csv-vertfold|
+    3.22 Transposing columns....................|csv-transpose|
+    3.23 Transforming into a table..............|csv-tabularize|
 4. CSV Filetype configuration...................|csv-configuration|
     4.1 Delimiter...............................|csv-delimiter|
     4.2 Column..................................|csv-column|
@@ -149,9 +151,10 @@ to know the name of the column in which the cursor is: >
 
 :NrColumns outputs the maximum number of columns available. It does this by
 testing the first 10 lines for the number of columns. This usually should be
-enough.
+enough. If you use the '!' attribute, it outputs the number of columns in the
+current line.
 
-3.3 SearchInColumn                                          *SearchInColumn_CSV*
+3.3 SearchInColumn                                        *SearchInColumn_CSV*
 ------------------
 
 Use :SearchInColumn to search for a pattern within a specific column. The
@@ -237,6 +240,12 @@ will delete column 2.
 
 If you don't specify a column number, it will delete the column on which the
 cursor is.
+You can also specify a search string. The plugin will then delete all columns
+that match the pattern: >
+    
+    :DeleteColumn /foobar
+<
+will delete all columns where the pattern "foobar" matches.
 
 3.8 InitCSV							*InitCSV*
 -----------
@@ -396,11 +405,11 @@ records. If [range] is not specified, creates a new line below the line the
 cursor is on and if count is not given, it defaults to 1.
 
 
-3.15 Change the delimiter                                    *NewRecords_CSV*
+3.15 Change the delimiter                                    *NewDelimiter_CSV*
 -------------------------
 
-If you want to change the field delimiter of you can use the :NewDelimiter
-command: >
+If you want to change the field delimiter of your file you can use the
+:NewDelimiter command: >
 
     :NewDelimiter char
 
@@ -489,12 +498,12 @@ replaced by the content of the actual column.
 For example, suppose you want to convert your data into HTML, then you first
 call the >
 
-    ConvertData
+    :ConvertData
 
 At this point, Vim will ask you for input. First, you need to specify, what
 needs to be done before processing the data:
 
-Pre convert text: <html><body><table> `
+    Pre convert text: <html><body><table> `
 
 This would specify to put the HTML Header before the actual data can be
 processed. If the variable g:csv_pre_convert is already defined, Vim will
@@ -502,15 +511,15 @@ already show you its' content as default value. Simply pressing Enter will use
 this data. After that, Vim asks, what the end of the converted file needs to
 look like:
 
-Post convert text: </table></body></html>
+    Post convert text: </table></body></html> `
 
 So here you are defining how to finish up the HTML file. If the variable
 g:csv_post_convert is already defined, Vim will already show you its' content
 as default value which you can confirm by pressing Enter. Last, you define,
 how your columns need to be converted. Again, Vim asks you for how to do that:
 
-Converted text, use %s for column input:
-<tr><td>%s</td><td>%s</td><td>%s</td></tr>
+    Converted text, use %s for column input: `
+    <tr><td>%s</td><td>%s</td><td>%s</td></tr>
 
 This time, you can use '%s' expandos. They tell Vim, that they need to be
 replaced by the actual content of your file. It does by going from the first
@@ -535,11 +544,12 @@ But may be you want your data converted into SQL-insert statements. That could
 be done like this: >
     
     ConvertData!
+<
     Pre convert text: `
 
 (Leave this empty. It won't be used).
 
-    Post convert text: Commit;`
+    Post convert text: Commit; `
 
 After inserting the data, commit it into the database.
 
@@ -552,10 +562,9 @@ quoted for the database.
 
 After hitting Enter, a new Window will be opened, which might look like this:
 
-Insert into table foobar values('Foobar', '2', 2011);
-Insert into table foobar values('Bar', '1', 2011);
-...
-Commit;           
+    Insert into table foobar values('Foobar', '2', 2011); `
+    Insert into table foobar values('Bar', '1', 2011); `
+    Commit; `
 
 Since the command was used with the bang attribute (!), the converted data
 doesn't include the column delimiters.
@@ -663,6 +672,49 @@ Use >
     :VertFold!
 
 to display all hidden columns again.
+
+                                                               *Transpose_CSV*
+3.22 Transposing a column                                      *csv-transpose*
+-------------------------
+
+Transposing means to exchange rows and columns. You can transpose the csv
+file, using the: >
+
+    :[range]Transpose
+<
+command. If [range] is not given, it will transpose the complete file,
+otherwise it will only transpose the lines in the range given. Note, comments
+will be deleted and transposing does not work with fixed-width columns.
+
+                                                            *CSV-Tabularize*
+3.23 Transforming into a table                              *csv-tabularize*
+------------------------------
+
+You  can also transform your csv data into a visual table, using the: >
+
+    :Tabularize
+<
+command. This will make a frame around your csv data and substitute all
+delimiters by '|', so that it will look like a table.
+
+e.g. consider this data: >
+
+    First,Second,Third
+    10,5,2
+    5,2,10
+    2,10,5
+    10,5,2
+
+This will be transformed into: >
+
+    |---------------------| 
+    | First| Second| Third|
+    |------|-------|------|
+    |    10|      5|     2|
+    |     5|      2|    10|
+    |     2|     10|     5|
+    |    10|      5|     2|
+    |---------------------|
 
 ==============================================================================
 4. CSV Configuration					 *csv-configuration*
@@ -848,7 +900,7 @@ Note, these changes won't take effect, until you restart Vim.
 
 RFC4180 allows newlines in double quoted strings. By default, the csv-plugin
 won't recognize newlines inside fields. It is however possible to make the
-plugin aware of newlines within quoted strings. To enbale this, set >
+plugin aware of newlines within quoted strings. To enable this, set >
 
     let g:csv_nl = 1
 
@@ -1232,6 +1284,21 @@ Alternatively, you can simply call |InitCSV| and ignore the error.
 
 ==============================================================================
 7. CSV Changelog					       *csv-changelog*
+
+0.26 Jul 25, 2012 {{{1
+- Better handling of setting filetype specific options
+- |CSV-Tabularize|
+- fix some small errors
+
+0.25 May 17, 2012 {{{1
+- |SearchInColumn_CSV| should match non-greedily, patch by Matěj Korvas,
+- better argument parsing for |SearchInColumn_CSV|, patch by Matěj Korvas,
+  thanks!
+0.24 Apr 12, 2012 {{{1
+- Allow to transpose the file (|csv-transpose|, suggested by Karan Mistry,
+  thanks!)
+- |DeleteColumn_CSV| allows to specify a search pattern and all matching
+  columns will be deleted (suggested by Karan Mistry, thanks!)
 
 0.23 Mar 25, 2012 {{{1
 - Don't error out, when creating a new file and syntax highlighting

@@ -14,8 +14,11 @@ snippet YMDt "yyyy-mm-dd hh:ss:mm" i
 `!v strftime("%Y-%m-%d %X")` 
 endsnippet
 
+snippet NOW "seconds since epoch" i
+`!p import time; snip.rv = int(time.time())` 
+endsnippet
 
 
-snippet nt "new task" i
+snippet NT "new task" i
 - [ ] ${1:task description}
 endsnippet

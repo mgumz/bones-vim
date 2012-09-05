@@ -83,6 +83,10 @@ set wildmode=list:longest,full
 set popt+=syntax:y                           "syntax when printing
 set lazyredraw
 
+set splitbelow
+set splitright
+set virtualedit=block
+
 set laststatus=2
 set statusline=
 set statusline+=%-3.3n\                      " buffer number
@@ -158,15 +162,8 @@ map <unique> <F2>  :Tlist<CR>
 let Tlist_Inc_Winwidth = 0
 "let Tlist_Use_Horiz_Window = 1
 
-" minibufexpl
-map <unique> <F5>  :TMiniBufExplorer<cr>
-
-" vtreeexplor.vim
+" nerdtree
 map <unique> <F3>  :VSTreeExplore<CR>
-
-" showmark.vim
-map <unique> <F4>  :ShowMarksToggle<CR>
-let g:showmarks_enable = 0
 
 " HTML
 let g:html_tag_case = 'lowercase'
@@ -186,6 +183,12 @@ let g:scrollfix=-1 "disabled for normal work
 if has('win32') || has('win64')
     let g:pydoc_cmd = 'python -m pydoc'
 endif
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
 
 " pathogen.vim
 if !has('python')
