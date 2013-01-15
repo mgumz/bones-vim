@@ -194,7 +194,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 if !has('python')
     let g:pathogen_disabled = [ 'ultisnips' ]
 endif
-call pathogen#infect('3rd')
+call pathogen#infect('3rd/*')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
