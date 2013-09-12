@@ -1,7 +1,7 @@
 " ============================================================================
 " Name:     Lucius vim color scheme
 " Author:   Jonathan Filip <jfilip1024@gmail.com>
-" Version:  8.1.1
+" Version:  8.1.4
 " ----------------------------------------------------------------------------
 "
 " Light and dark color scheme for GUI and 256 color terminal.
@@ -88,6 +88,12 @@
 " Setting this will cause the color scheme to use underlined fonts for some
 " items.
 "
+" g:lucius_no_term_bg (default: 0)
+"
+" Setting this will cause the color scheme to not set a background color in
+" the terminal (useful for transparency or terminals with different background
+" colors).
+"
 " ============================================================================
 
 
@@ -96,19 +102,17 @@
 " Options:
 " ============================================================================
 
+unlet! g:colors_name
 hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let colors_name="lucius"
 
 if exists("g:lucius_style")
     let s:style = g:lucius_style
 else
     let s:style = &background
 endif
-
-exec "set background=" . s:style
 
 if exists("g:lucius_contrast")
     let s:contrast = g:lucius_contrast
@@ -132,6 +136,12 @@ if exists("g:lucius_use_underline")
     let s:use_underline = g:lucius_use_underline
 else
     let s:use_underline = 1
+endif
+
+if exists("g:lucius_no_term_bg")
+    let s:no_term_bg = g:lucius_no_term_bg
+else
+    let s:no_term_bg = 0
 endif
 
 
@@ -232,7 +242,6 @@ endfunction
 " ============================================================================
 
 let s:normal_items = [
-            \ "Normal",
             \ "ColorColumn", "Comment", "Constant", "Cursor", "CursorColumn",
             \ "CursorIM", "CursorLine", "CursorLineNr", "DiffAdd", "DiffChange",
             \ "DiffDelete", "Directory", "Error", "ErrorMsg", "Identifier",
@@ -257,20 +266,17 @@ let s:undercurl_items = [
             \ "SpellBad", "SpellCap", "SpellLocal", "SpellRare"
             \ ]
 
-" Clear default settings
-for s:item in s:normal_items + s:bold_items + s:underline_items + s:undercurl_items
-    exec "hi " . s:item . " guifg=NONE guibg=NONE gui=none"
-                \ . " ctermfg=NONE ctermbg=NONE cterm=none term=none"
-endfor
-
 
 " ============================================================================
 " Color Definitions:
 " ============================================================================
 
 " ----------------------------------------------------------------------------
-" Default Foreground:
+" 'Normal' Colors:
 " ----------------------------------------------------------------------------
+
+hi clear Normal
+hi Normal gui=none cterm=none term=none
 
 if s:style == "light"
     if s:contrast == "high"
@@ -290,11 +296,6 @@ else
     endif
 endif
 
-
-" ----------------------------------------------------------------------------
-" Default Background:
-" ----------------------------------------------------------------------------
-
 if s:style == "light"
     if s:contrast_bg == "high"
         hi Normal                       guibg=#ffffff
@@ -308,6 +309,23 @@ else
         hi Normal                       guibg=#303030
     endif
 endif
+
+call s:AddCterm("Normal")
+
+
+" ----------------------------------------------------------------------------
+" Extra setup
+" ----------------------------------------------------------------------------
+
+exec "set background=" . s:style
+
+" Clear default settings
+for s:item in s:normal_items + s:bold_items + s:underline_items + s:undercurl_items
+    exec "hi " . s:item . " guifg=NONE guibg=NONE gui=none"
+                \ . " ctermfg=NONE ctermbg=NONE cterm=none term=none"
+endfor
+
+let g:colors_name="lucius"
 
 
 " ----------------------------------------------------------------------------
@@ -341,8 +359,8 @@ if s:style == "light"
         hi Type         guifg=#005f87
     endif
 else
-    hi NonText      guifg=#5f5f87
-    hi SpecialKey   guifg=#5f875f
+    hi NonText			guifg=#5f875f
+    hi SpecialKey		guifg=#5f5f87
     if s:contrast == "low"
         hi Comment      guifg=#6c6c6c
         hi Constant     guifg=#afaf87
@@ -486,7 +504,7 @@ hi TabLine      guifg=bg
 hi TabLineSel   guifg=fg
 hi WildMenu     guifg=fg
 if s:style == "light"
-    hi ColorColumn                  guibg=#d7d7af
+    hi ColorColumn                  guibg=#e4e4e4
     hi CursorLineNr guifg=#9e9e9e   guibg=#dadada
     hi FoldColumn                   guibg=#bcbcbc
     hi Folded                       guibg=#bcbcbc
@@ -525,7 +543,7 @@ if s:style == "light"
         hi VertSplit                    guibg=#808080
     endif
 else
-    hi ColorColumn                  guibg=#87875f
+    hi ColorColumn                  guibg=#3a3a3a
     hi CursorLineNr guifg=#626262   guibg=#444444
     hi FoldColumn                   guibg=#4e4e4e
     hi Folded                       guibg=#4e4e4e
@@ -639,10 +657,6 @@ hi Underlined   guifg=fg
 " Text Emphasis:
 " ============================================================================
 
-for s:item in s:normal_items
-    exec "hi " . s:item . " gui=none cterm=none term=none"
-endfor
-
 if s:use_bold == 1
     for s:item in s:bold_items
         exec "hi " . s:item . " gui=bold cterm=bold term=none"
@@ -667,8 +681,6 @@ endfor
 " Cterm Colors:
 " ============================================================================
 
-call s:AddCterm("Normal")
-
 for s:item in s:normal_items + s:bold_items + s:underline_items
     call s:AddCterm(s:item)
 endfor
@@ -676,6 +688,10 @@ endfor
 for s:item in s:undercurl_items
     call s:AddSpCterm(s:item)
 endfor
+
+if s:no_term_bg == 1
+    hi Normal ctermbg=NONE
+endif
 
 
 " ============================================================================

@@ -144,6 +144,7 @@ let html_number_lines=1
 let html_use_css=1
 let use_xhtml=1
 
+let g:pathogen_disabled=[]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " local stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -192,9 +193,9 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " pathogen.vim
 if !has('python')
-    let g:pathogen_disabled = [ 'ultisnips' ]
+    let g:pathogen_disabled += [ 'ultisnips' ]
 endif
-call pathogen#infect('3rd/*')
+call pathogen#infect('3rd/{}')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
