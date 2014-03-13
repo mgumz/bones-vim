@@ -340,7 +340,7 @@ function! s:insert(...) " {{{1
 endfunction " }}}1
 
 function! s:reindent() " {{{1
-  if exists("b:surround_indent") ? b:surround_indent : (exists("g:surround_indent") && g:surround_indent)
+  if exists("b:surround_indent") ? b:surround_indent : (!exists("g:surround_indent") || g:surround_indent)
     silent norm! '[=']
   endif
 endfunction " }}}1
@@ -379,6 +379,12 @@ function! s:dosurround(...) " {{{1
   let strcount = (scount == 1 ? "" : scount)
   if char == '/'
     exe 'norm! '.strcount.'[/d'.strcount.']/'
+  elseif char =~# '[[:punct:]]' && char !~# '[][(){}<>"''`]'
+    exe 'norm! T'.char
+    if getline('.')[col('.')-1] == char
+      exe 'norm! l'
+    endif
+    exe 'norm! dt'.char
   else
     exe 'norm! d'.strcount.'i'.char
   endif
@@ -403,6 +409,9 @@ function! s:dosurround(...) " {{{1
     norm! "_x
     call setreg('"','/**/',"c")
     let keeper = substitute(substitute(keeper,'^/\*\s\=','',''),'\s\=\*$','','')
+  elseif char =~# '[[:punct:]]' && char !~# '[][(){}<>]'
+    exe 'norm! F'.char
+    exe 'norm! df'.char
   else
     " One character backwards
     call search('.','bW')
@@ -567,11 +576,13 @@ if !exists("g:surround_no_mappings") || ! g:surround_no_mappings
   nmap ySS <Plug>YSsurround
   xmap S   <Plug>VSurround
   xmap gS  <Plug>VgSurround
-  if !hasmapto("<Plug>Isurround","i") && "" == mapcheck("<C-S>","i")
-    imap    <C-S> <Plug>Isurround
+  if !exists("g:surround_no_insert_mappings") || ! g:surround_no_insert_mappings
+    if !hasmapto("<Plug>Isurround","i") && "" == mapcheck("<C-S>","i")
+      imap    <C-S> <Plug>Isurround
+    endif
+    imap      <C-G>s <Plug>Isurround
+    imap      <C-G>S <Plug>ISurround
   endif
-  imap      <C-G>s <Plug>Isurround
-  imap      <C-G>S <Plug>ISurround
 endif
 
 " vim:set ft=vim sw=2 sts=2 et:
