@@ -13,100 +13,167 @@ scriptencoding utf-8
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if ($TERM == "rxvt-unicode") && (&termencoding == "")
-    set termencoding=utf-8
-endif
-
-if &term =~ "xterm" || &term == "rxvt-unicode"
-    if exists('&t_SI')
-        let &t_SI = "\<Esc>]12;lightgoldenrod\x7"
-        let &t_EI = "\<Esc>]12;grey80\x7"
+function s:setup_encoding()
+    if ($TERM == "rxvt-unicode") && (&termencoding == "")
+        set termencoding=utf-8
     endif
-endif
+    if &term =~ "xterm" || &term == "rxvt-unicode"
+        if exists('&t_SI')
+            let &t_SI = "\<Esc>]12;lightgoldenrod\x7"
+            let &t_EI = "\<Esc>]12;grey80\x7"
+        endif
+    endif
+    set encoding=utf-8
+endfunction
 
-set background=dark
+
+function s:setup_theme()
+    set background=dark
+endfunction
+
+
+function s:setup_search()
+    set hlsearch
+
+    " This rewires n and N to do the highlighing...
+    nnoremap <silent> n   n:call HLNext(0.4, "Visual")<cr>
+    nnoremap <silent> N   N:call HLNext(0.4, "Visual")<cr>
+
+    if !exists("autocommands_loaded")
+        " http://superuser.com/questions/156248/disable-set-hlsearch-when-i-enter-insert-mode/156290#156290
+        autocmd InsertEnter * :setlocal nohlsearch
+        autocmd InsertLeave * :setlocal hlsearch
+    endif
+    set incsearch
+    set ignorecase
+    set smartcase
+endfunction
+
+
+function s:setup_ws_display()
+    " Show tabs and trailing whitespace visually
+    if (&termencoding == "utf-8")
+        if v:version >= 700
+            set listchars=tab:»·,trail:·,extends:¿,nbsp:¿
+        else
+            set listchars=tab:»·,trail:·,extends:¿
+        endif
+    else
+        if v:version >= 700
+            set listchars=tab:>-,trail:.,extends:>,nbsp:_
+        else
+            set listchars=tab:>-,trail:.,extends:>
+        endif
+    endif
+    set list
+endfunction
+
+
+function s:setup_visual_helpers()
+    set showbreak=+
+    set number
+    set ruler
+    set visualbell vb
+    " if possible, try to use a narrow number column.
+    if v:version >= 700 && exists('+linebreak')
+       set numberwidth=3
+    endif
+
+    " colorcolumn | mark 
+    if exists('+cc')
+        "set colorcolumn=+1   " mark textwidth + 1 column as end
+
+        " http://www.techtalkshub.com/instantly-better-vim/
+        let s=printf('\%%%dv', &l:textwidth + 1)
+        call matchadd('ColorColumn', s, 100)
+    endif
+    if has("syntax")
+        syntax on
+    endif
+endfunction
+
+
+function s:setup_lines()
+    set textwidth=78
+    set formatoptions-=t " don't wrap at textwidth, no need to set tw=0
+    set nolinebreak
+    set nowrap
+    set shiftwidth=4
+    set softtabstop=4
+    set tabstop=4
+    set expandtab
+endfunction
+
+
+function s:setup_completion()
+    set wildignore=*.o,*.bak,*.exe,*.so
+    set wildmenu                                 "menu when tabcomplete
+    set wildmode=list:longest,full
+    set completeopt+=longest
+
+    if exists('+shellslash') | set shellslash | endif
+endfunction
+
+
+function s:setup_status_line()
+    set laststatus=2
+    set statusline=
+    set statusline+=%-3.3n\                      " buffer number
+    set statusline+=%f\                          " file name
+    set statusline+=%h%m%r%w                     " flags
+    set statusline+=\[%{strlen(&ft)?&ft:'none'}, " filetype
+    set statusline+=%{&encoding},                " encoding
+    set statusline+=%{&fileformat}]              " file format
+    set statusline+=%=                           " right align
+    set statusline+=%-b\ 0x%-8B\                 " current char
+    set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
+endfunction
+
+
+function s:setup_tags()
+    " search upward for a 'tags' file
+    let &tags="tags;./tags"
+    " add some more tags (mainly for omnicompletion)
+    let s:tfs=split(globpath(&rtp, "tags/*.tags"),"\n")
+    for s:tf in s:tfs
+        let &tags.=",".expand(escape(escape(s:tf, " "), " "))
+    endfor
+endfunction
+
+
+function s:setup_modeline()
+    " Enable modelines only on secure vim versions
+    if (v:version == 603 && has("patch045")) || (v:version > 603)
+        set modeline
+    else
+        set nomodeline
+    endif
+endfunction
+
+
+function s:setup_indentation()
+    set cindent
+    set cpoptions+=$
+    autocmd BufRead,BufNewFile *.txt setlocal nocindent
+    autocmd BufRead,BufNewFile * if &ft == 'changelog' | setlocal nocindent | endif
+endfunction
+
+
+function s:setup_window() " {{{1
+    set scrolloff=3
+    set hidden
+    set lazyredraw
+    set splitbelow
+    set splitright
+    set virtualedit=block
+endfunction             " }}}
+
+
+
 set nocompatible
-set cpoptions+=$
-
-set cindent
-autocmd BufRead,BufNewFile *.txt setlocal nocindent
-autocmd BufRead,BufNewFile * if &ft == 'changelog' | setlocal nocindent | endif
-
-if exists('+shellslash') | set shellslash | endif
-
-set encoding=utf-8
-set expandtab
-
-set hidden
-set hlsearch
-if !exists("autocommands_loaded")
-    " http://superuser.com/questions/156248/disable-set-hlsearch-when-i-enter-insert-mode/156290#156290
-    autocmd InsertEnter * :setlocal nohlsearch
-    autocmd InsertLeave * :setlocal hlsearch
-endif
-set incsearch
-set ignorecase
-set smartcase
-
-" Show tabs and trailing whitespace visually
-if (&termencoding == "utf-8")
-    if v:version >= 700
-        set listchars=tab:»·,trail:·,extends:¿,nbsp:¿
-    else
-        set listchars=tab:»·,trail:·,extends:¿
-    endif
-else
-    if v:version >= 700
-        set listchars=tab:>-,trail:.,extends:>,nbsp:_
-    else
-        set listchars=tab:>-,trail:.,extends:>
-    endif
-endif
-set list
-set nolinebreak
-set showbreak=+
-set nowrap
-set number
-set ruler
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
-set textwidth=78
-if exists('+cc')  " colorcolumn
-    set cc=+1
-endif
-set scrolloff=3
-set visualbell vb
-set wildignore=*.o,*.bak,*.exe,*.so
-set wildmenu                                 "menu when tabcomplete
-set wildmode=list:longest,full
 set popt+=syntax:y                           "syntax when printing
-set lazyredraw
-
-set splitbelow
-set splitright
-set virtualedit=block
-
-set laststatus=2
-set statusline=
-set statusline+=%-3.3n\                      " buffer number
-set statusline+=%f\                          " file name
-set statusline+=%h%m%r%w                     " flags
-set statusline+=\[%{strlen(&ft)?&ft:'none'}, " filetype
-set statusline+=%{&encoding},                " encoding
-set statusline+=%{&fileformat}]              " file format
-set statusline+=%=                           " right align
-set statusline+=%-b\ 0x%-8B\                 " current char
-set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
 "set dictionary=/usr/share/dict/words
-
-" if possible, try to use a narrow number column.
-if v:version >= 700 && exists('+linebreak') | set numberwidth=3 | endif
-
-if has("syntax")
-    syntax on
-endif
 
 if has("eval")
     filetype on
@@ -118,24 +185,27 @@ if has("digraphs")
     digraph ., 8230  " ellipsis (¿)
 endif
 
-" search upward for a 'tags' file
-let &tags="tags;./tags"
-" add some more tags (mainly for omnicompletion)
-let s:tfs=split(globpath(&rtp, "tags/*.tags"),"\n")
-for s:tf in s:tfs
-    let &tags.=",".expand(escape(escape(s:tf, " "), " "))
-endfor
-
 set dir=$TEMP,~/tmp,/tmp
 
-set completeopt+=longest
 
-" Enable modelines only on secure vim versions
-if (v:version == 603 && has("patch045")) || (v:version > 603)
-    set modeline
-else
-    set nomodeline
-endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call s:setup_encoding()
+call s:setup_theme()
+call s:setup_status_line()
+call s:setup_modeline()
+call s:setup_window()
+call s:setup_lines()
+
+call s:setup_completion()
+call s:setup_search()
+
+call s:setup_visual_helpers()
+call s:setup_ws_display()
+call s:setup_indentation()
+
+call s:setup_tags()
 
 " runtime ftplugin/man.vim
 runtime macros/matchit.vim
@@ -200,6 +270,21 @@ call pathogen#infect('3rd/{}')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" http://www.techtalkshub.com/instantly-better-vim/
+function! HLNext (blinktime, hlgroup)
+        let [bufnum, lnum, col, off] = getpos('.')
+        let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+        let target_pat = '\c\%#'.@/
+        let ring = matchadd(a:hlgroup, target_pat, 101)
+        redraw
+        exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+        call matchdelete(ring)
+        redraw
+    endfunction
+
+
+
 " recreate ctags
 func! RecreateTags()
     if &filetype == 'c' || &filetype == 'cpp'
