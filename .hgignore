@@ -16,3 +16,4 @@ syntax: glob
 3rd\emmet-vim-master\unittest.vim
 3rd\nerdtree\.gitignore
 3rd\nerdtree\README.markdown
+3rd.old

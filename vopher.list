@@ -1,0 +1,36 @@
+# colors
+https://github.com/altercation/vim-colors-solarized#master
+
+# status-line
+https://github.com/bling/vim-bufferline
+https://github.com/itchyny/lightline.vim
+
+# git
+https://github.com/tpope/vim-fugitive
+https://github.com/airblade/vim-gitgutter
+
+# completion
+https://github.com/kien/ctrlp.vim#1.79
+https://github.com/mattn/emmet-vim/
+
+# layout / buffers
+https://github.com/vim-scripts/scrollfix
+goldenview https://github.com/zhaocai/GoldenView.Vim#V1.3.5
+https://github.com/moll/vim-bbye#v1.0.1
+
+# syntax-checking
+https://github.com/scrooloose/syntastic
+
+# python
+https://github.com/mitsuhiko/vim-jinja
+https://github.com/kevinw/pyflakes-vim
+
+# golang
+https://github.com/fatih/vim-go
+## disabled: https://github.com/vim-jp/vim-go-extra
+
+
+# ctags
+https://github.com/majutsushi/tagbar
+taglist-46 http://www.vim.org/scripts/download_script.php?src_id=19574 strip=0
+
