@@ -1,19 +1,9 @@
 doc/tags
 spell/.*\.add
-3rd/cream
-3rd/vim-faq
+3rd
+3rd.old
 .hgignore
 vimrc.local
 .*\.pyc
 tags/.*\.tags
 syntax: glob
-3rd\emmet-vim-master\.gitignore
-3rd\emmet-vim-master\.gitmodules
-3rd\emmet-vim-master\Makefile
-3rd\emmet-vim-master\README.mkd
-3rd\emmet-vim-master\TODO
-3rd\emmet-vim-master\TUTORIAL
-3rd\emmet-vim-master\unittest.vim
-3rd\nerdtree\.gitignore
-3rd\nerdtree\README.markdown
-3rd.old
