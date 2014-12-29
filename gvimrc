@@ -13,7 +13,7 @@ endfunction
 
 
 function s:setup_theme()
-    colorscheme lucius
+    colorscheme badwolf
     if has("gui_kde")
         set guifont=Consolas/13/-1/5/50/0/0/0/0/0
     elseif has("gui_gtk")

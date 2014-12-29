@@ -207,8 +207,6 @@ call s:setup_indentation()
 
 call s:setup_tags()
 
-" runtime ftplugin/man.vim
-runtime macros/matchit.vim
 "settings for :TOhtml
 let html_number_lines=1
 let html_use_css=1
@@ -223,18 +221,15 @@ execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugin - settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" pathogen.vim
+if !has('python')
+    let g:pathogen_disabled += [ 'ultisnips' ]
+endif
+call pathogen#infect('3rd/{}')
+
 " runtime plugin/a.vim
 let g:alternateExtensions_cc = "hh,HH"
 let g:alternateExtensions_hh = "cc,CC"
-
-" taglist.vim
-map <unique> ,<F2> :TlistSync<CR>
-map <unique> <F2>  :Tlist<CR>
-let Tlist_Inc_Winwidth = 0
-"let Tlist_Use_Horiz_Window = 1
-
-" nerdtree
-map <unique> <F3>  :VSTreeExplore<CR>
 
 " HTML
 let g:html_tag_case = 'lowercase'
@@ -261,11 +256,15 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 
-" pathogen.vim
-if !has('python')
-    let g:pathogen_disabled += [ 'ultisnips' ]
-endif
-call pathogen#infect('3rd/{}')
+
+
+" unite
+let g:unite_source_history_yank_enable = 1
+let g:unite_split_rule = "botright"
+let g:unite_enable_start_insert = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+map <unique> <F2>  :Unite buffer file<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
