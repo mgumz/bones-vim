@@ -30,6 +30,7 @@ endfunction
 function s:setup_theme()
     set background=dark
     if has("gui_running")
+        colorscheme badwolf
         if has("gui_kde")
             set guifont=Consolas/13/-1/5/50/0/0/0/0/0
         elseif has("gui_gtk")
@@ -39,6 +40,10 @@ function s:setup_theme()
         else
             set guifont=-xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-1
         endif
+    elseif &term =~ "256"
+        colorscheme badwolf
+    else
+        colorscheme lucius
     endif
 endfunction
 
