@@ -31,15 +31,20 @@ function s:setup_theme()
     set background=dark
     if has("gui_running")
         colorscheme badwolf
+        let l:fsize = "13"
+        let l:font = "Consolas"
         if has("gui_kde")
-            set guifont=Consolas/13/-1/5/50/0/0/0/0/0
+            let l:font += "/" . l:fsize . "/-1/5/50/0/0/0/0/0"
+        elseif has("mac")
+            let l:font = "Menlo Regular:h" . l:fsize
         elseif has("gui_gtk")
-            set guifont=Consolas\ 13
+            let l:font += " " . l:fsize
         elseif has("win32") || has("win64")
-            set guifont=Consolas:h12
+            let l:font += ":h" . l:fsize
         else
-            set guifont=-xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-1
+            let l:font = "-xos4-terminus-medium-r-normal--".l:fsize."-140-72-72-c-80-iso8859-1"
         endif
+        let &guifont = l:font
     elseif &term =~ "256"
         colorscheme badwolf
     else
