@@ -34,13 +34,13 @@ function s:setup_theme()
         let l:fsize = "13"
         let l:font = "Consolas"
         if has("gui_kde")
-            let l:font += "/" . l:fsize . "/-1/5/50/0/0/0/0/0"
+            let l:font = l:font . "/" . l:fsize . "/-1/5/50/0/0/0/0/0"
         elseif has("mac")
             let l:font = "Menlo Regular:h" . l:fsize
         elseif has("gui_gtk")
-            let l:font += " " . l:fsize
+            let l:font = l:font . " " . l:fsize
         elseif has("win32") || has("win64")
-            let l:font += ":h" . l:fsize
+            let l:font = l:font . ":h" . l:fsize
         else
             let l:font = "-xos4-terminus-medium-r-normal--".l:fsize."-140-72-72-c-80-iso8859-1"
         endif
