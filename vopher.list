@@ -6,7 +6,7 @@ https://github.com/bling/vim-bufferline
 https://github.com/itchyny/lightline.vim
 
 # git
-https://github.com/tpope/vim-fugitive
+https://github.com/tpope/vim-fugitive#v2.2
 https://github.com/airblade/vim-gitgutter
 https://github.com/int3/vim-extradite
 
@@ -20,11 +20,12 @@ https://github.com/jiangmiao/auto-pairs#v1.3.1
 https://github.com/vim-scripts/scrollfix
 goldenview https://github.com/zhaocai/GoldenView.Vim#V1.3.5
 https://github.com/moll/vim-bbye#v1.0.1
+https://github.com/ap/vim-buftabline
 #DISABLED https://github.com/vim-scripts/buftabs#0.18
 #TODO: checkout https://github.com/terryma/vim-multiple-cursors
 
 # syntax-checking
-https://github.com/scrooloose/syntastic
+https://github.com/scrooloose/syntastic#3.6.0
 
 # python
 https://github.com/mitsuhiko/vim-jinja
@@ -48,6 +49,7 @@ https://github.com/PProvost/vim-ps1
 # other
 https://github.com/mattn/calendar-vim
 https://github.com/Rykka/easydigraph.vim
-https://github.com/chrisbra/unicode.vim
+https://github.com/chrisbra/unicode.vim#0.20
 https://github.com/sjl/gundo.vim
-https://github.com/jreybert/vim-largefile
+http://www.drchip.org/astronaut/vim/vbafiles/LargeFile.vba.gz
+# not needed atm: http://www.drchip.org/astronaut/vim/tarfiles/vimball.tar.gz
