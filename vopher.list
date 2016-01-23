@@ -35,7 +35,6 @@ https://github.com/kevinw/pyflakes-vim
 https://github.com/fatih/vim-go
 ## disabled: https://github.com/vim-jp/vim-go-extra
 
-
 # ctags / tags
 https://github.com/majutsushi/tagbar
 taglist-46 http://www.vim.org/scripts/download_script.php?src_id=19574 strip=0
@@ -45,6 +44,7 @@ taglist-46 http://www.vim.org/scripts/download_script.php?src_id=19574 strip=0
 https://github.com/chrisbra/csv.vim
 https://github.com/tpope/vim-markdown
 https://github.com/PProvost/vim-ps1
+https://github.com/mxw/vim-jsx
 
 # other
 https://github.com/mattn/calendar-vim
