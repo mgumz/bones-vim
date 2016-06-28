@@ -13,7 +13,7 @@ https://github.com/int3/vim-extradite
 # completion
 https://github.com/mattn/emmet-vim/
 https://github.com/terryma/vim-multiple-cursors
-https://github.com/Shougo/unite.vim#ver.6.1
+https://github.com/Shougo/unite.vim#ver.6.2
 https://github.com/jiangmiao/auto-pairs#v1.3.1
 
 # layout / buffers
@@ -25,15 +25,16 @@ https://github.com/ap/vim-buftabline
 #TODO: checkout https://github.com/terryma/vim-multiple-cursors
 
 # syntax-checking
-https://github.com/scrooloose/syntastic#3.6.0
+https://github.com/scrooloose/syntastic#3.7.0
 
 # python
 https://github.com/mitsuhiko/vim-jinja
 https://github.com/kevinw/pyflakes-vim
 
 # golang
-https://github.com/fatih/vim-go#v1.4
+https://github.com/fatih/vim-go#v1.7.1
 ## disabled: https://github.com/vim-jp/vim-go-extra
+
 
 # ctags / tags
 https://github.com/majutsushi/tagbar
@@ -44,7 +45,6 @@ taglist-46 http://www.vim.org/scripts/download_script.php?src_id=19574 strip=0
 https://github.com/chrisbra/csv.vim
 https://github.com/tpope/vim-markdown
 https://github.com/PProvost/vim-ps1
-https://github.com/mxw/vim-jsx
 
 # other
 https://github.com/mattn/calendar-vim
@@ -53,3 +53,5 @@ https://github.com/chrisbra/unicode.vim#0.20
 https://github.com/sjl/gundo.vim
 http://www.drchip.org/astronaut/vim/vbafiles/LargeFile.vba.gz
 # not needed atm: http://www.drchip.org/astronaut/vim/tarfiles/vimball.tar.gz
+https://github.com/elixir-lang/vim-elixir
+https://github.com/lambdatoast/elm.vim.git
