@@ -50,6 +50,11 @@ function s:setup_theme()
     else
         colorscheme lucius
     endif
+
+    if has('nvim')
+        colorscheme badwolf
+        set termguicolors
+    endif
 endfunction
 
 
@@ -326,8 +331,43 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:unite_source_history_yank_enable = 1
 let g:unite_split_rule = "botright"
 let g:unite_enable_start_insert = 1
+if executable('pt')
+    " Use pt (the platinum searcher)
+    " https://github.com/monochromegane/the_platinum_searcher
+    let g:unite_source_grep_command = 'pt'
+    let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+    let g:unite_source_grep_recursive_opt = ''
+elseif executable("rg")
+    let g:unite_source_grep_command="rg"
+    let g:unite_source_grep_default_opts="-i --no-heading"
+    let g:unite_source_rec_async_command =
+    \ ['rg', '--follow', '--no-heading', '--hidden', '']
+elseif executable('ag')
+    " Use ag (the silver searcher)
+    " https://github.com/ggreer/the_silver_searcher
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+                \ '-i --vimgrep --hidden --ignore ' .
+                \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack-grep')
+    " Use ack
+    " http://beyondgrep.com/
+    let g:unite_source_grep_command = 'ack-grep'
+    let g:unite_source_grep_default_opts =
+                \ '-i --no-heading --no-color -k -H'
+    let g:unite_source_grep_recursive_opt = ''
+endif
+
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 map <unique> <F2>  :Unite buffer file<CR>
+let g:unite_source_history_yank_enable = 1
+map <unique> ,ut :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
+map <unique> ,uf :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
+"map <unique> ,ur :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+map <unique> ,uo :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+map <unique> ,uy :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
+map <unique> ,ue :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
