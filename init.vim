@@ -295,6 +295,12 @@ execute("silent! source ".globpath(split(&rtp, ",")[0], "init.local.vim"))
 if !has('python')
     let g:pathogen_disabled += [ 'ultisnips' ]
 endif
+if !executable('git') 
+    let g:pathogen_disabled += [ 'vim-gitgutter', 'nerdtree-git-plugin' ]
+end
+if !executable('ctags')
+    let g:pathogen_disabled += [ 'tagbar' ]
+endif
 
 call pathogen#infect('3rd/{}')
 
