@@ -299,7 +299,7 @@ if !executable('git')
     let g:pathogen_disabled += [ 'vim-gitgutter', 'nerdtree-git-plugin' ]
 end
 if !executable('ctags')
-    let g:pathogen_disabled += [ 'tagbar' ]
+    let g:pathogen_disabled += [ 'tagbar', 'taglist-46' ]
 endif
 
 call pathogen#infect('3rd/{}')
