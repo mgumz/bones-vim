@@ -286,6 +286,7 @@ let g:pathogen_disabled=[]
 " local stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
+execute("silent! source ".globpath(split(&rtp, ",")[0], "init.local.vim"))
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugin - settings
@@ -294,6 +295,7 @@ execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
 if !has('python')
     let g:pathogen_disabled += [ 'ultisnips' ]
 endif
+
 call pathogen#infect('3rd/{}')
 
 " runtime plugin/a.vim

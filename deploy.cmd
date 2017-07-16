@@ -1,1 +1,1 @@
-copy vimrc ..\_vimrc
+copy init.vim ..\_vimrc
