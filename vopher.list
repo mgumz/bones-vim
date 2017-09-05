@@ -6,7 +6,7 @@ https://github.com/bling/vim-bufferline
 https://github.com/itchyny/lightline.vim
 
 # git
-https://github.com/tpope/vim-fugitive#v2.2
+https://github.com/tpope/vim-fugitive#913fff1c
 https://github.com/airblade/vim-gitgutter
 https://github.com/int3/vim-extradite
 
@@ -34,9 +34,11 @@ https://github.com/mitsuhiko/vim-jinja
 https://github.com/kevinw/pyflakes-vim
 
 # golang
-https://github.com/fatih/vim-go#v1.13
+https://github.com/fatih/vim-go#v1.14
 ## disabled: https://github.com/vim-jp/vim-go-extra
 
+# swift
+https://github.com/keith/swift.vim
 
 # ctags / tags
 https://github.com/majutsushi/tagbar#v2.7
