@@ -1,30 +1,27 @@
 # colors
-https://github.com/altercation/vim-colors-solarized#master
+#https://github.com/altercation/vim-colors-solarized#master
 
 # status-line
-https://github.com/bling/vim-bufferline
 https://github.com/itchyny/lightline.vim
+https://github.com/itchyny/lightline-powerful
+https://github.com/ap/vim-buftabline
 
 # git
-https://github.com/tpope/vim-fugitive#913fff1c
+https://github.com/tpope/vim-fugitive#7c9b87a3c3ef4b53425aca4a27e11a7359caae9f
 https://github.com/airblade/vim-gitgutter
 https://github.com/int3/vim-extradite
 
 # completion
+https://github.com/junegunn/fzf
+https://github.com/junegunn/fzf.vim
 https://github.com/mattn/emmet-vim/
-https://github.com/terryma/vim-multiple-cursors
-https://github.com/Shougo/unite.vim#ver.6.3
-https://github.com/Shougo/vimproc.vim#ver.9.3
 https://github.com/jiangmiao/auto-pairs#v1.3.1
 
 # layout / buffers
 https://github.com/vim-scripts/scrollfix
 goldenview https://github.com/zhaocai/GoldenView.Vim#V1.3.5
 https://github.com/moll/vim-bbye#v1.0.1
-https://github.com/ap/vim-buftabline
 https://github.com/yuttie/comfortable-motion.vim
-#DISABLED https://github.com/vim-scripts/buftabs#0.18
-#TODO: checkout https://github.com/terryma/vim-multiple-cursors
 
 # syntax-checking
 https://github.com/scrooloose/syntastic#3.8.0
@@ -34,11 +31,14 @@ https://github.com/mitsuhiko/vim-jinja
 https://github.com/kevinw/pyflakes-vim
 
 # golang
-https://github.com/fatih/vim-go#v1.14
+https://github.com/fatih/vim-go#v1.15
 ## disabled: https://github.com/vim-jp/vim-go-extra
 
 # swift
 https://github.com/keith/swift.vim
+
+# elixir
+https://github.com/elixir-lang/vim-elixir
 
 # ctags / tags
 https://github.com/majutsushi/tagbar#v2.7
@@ -51,13 +51,12 @@ https://github.com/tpope/vim-markdown
 https://github.com/PProvost/vim-ps1
 
 # other
-https://github.com/mattn/calendar-vim
+https://github.com/vim-utils/vim-man
 https://github.com/Rykka/easydigraph.vim
 https://github.com/chrisbra/unicode.vim
 https://github.com/sjl/gundo.vim
 http://www.drchip.org/astronaut/vim/vbafiles/LargeFile.vba.gz
 https://github.com/tpope/vim-commentary
-https://github.com/elixir-lang/vim-elixir
 
 https://github.com/Shougo/vinarise.vim
 

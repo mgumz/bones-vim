@@ -292,9 +292,6 @@ execute("silent! source ".globpath(split(&rtp, ",")[0], "init.local.vim"))
 " plugin - settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " pathogen.vim
-if !has('python')
-    let g:pathogen_disabled += [ 'ultisnips' ]
-endif
 if !executable('git') 
     let g:pathogen_disabled += [ 'vim-gitgutter', 'nerdtree-git-plugin' ]
 end
@@ -304,20 +301,10 @@ endif
 
 call pathogen#infect('3rd/{}')
 
-" runtime plugin/a.vim
-let g:alternateExtensions_cc = "hh,HH"
-let g:alternateExtensions_hh = "cc,CC"
-
 " HTML
 let g:html_tag_case = 'lowercase'
 let g:no_html_toolbar = 'yes'
 let g:no_html_tab_mapping = 'yes'
-
-" calendar.vim
-let g:calendar_weeknm = 1
-
-" ragtag.vim
-let g:ragtag_global_maps = 1
 
 " scrollfix.vim
 let g:scrollfix=-1 "disabled for normal work
@@ -326,56 +313,6 @@ let g:scrollfix=-1 "disabled for normal work
 if has('win32') || has('win64')
     let g:pydoc_cmd = 'python -m pydoc'
 endif
-
-" ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-
-
-
-" unite
-let g:unite_source_history_yank_enable = 1
-let g:unite_split_rule = "botright"
-let g:unite_enable_start_insert = 1
-if executable('pt')
-    " Use pt (the platinum searcher)
-    " https://github.com/monochromegane/the_platinum_searcher
-    let g:unite_source_grep_command = 'pt'
-    let g:unite_source_grep_default_opts = '--nogroup --nocolor'
-    let g:unite_source_grep_recursive_opt = ''
-elseif executable("rg")
-    let g:unite_source_grep_command="rg"
-    let g:unite_source_grep_default_opts="-i --no-heading"
-    let g:unite_source_rec_async_command =
-    \ ['rg', '--follow', '--no-heading', '--hidden', '']
-elseif executable('ag')
-    " Use ag (the silver searcher)
-    " https://github.com/ggreer/the_silver_searcher
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts =
-                \ '-i --vimgrep --hidden --ignore ' .
-                \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-    let g:unite_source_grep_recursive_opt = ''
-elseif executable('ack-grep')
-    " Use ack
-    " http://beyondgrep.com/
-    let g:unite_source_grep_command = 'ack-grep'
-    let g:unite_source_grep_default_opts =
-                \ '-i --no-heading --no-color -k -H'
-    let g:unite_source_grep_recursive_opt = ''
-endif
-
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-map <unique> <F2>  :Unite buffer file<CR>
-let g:unite_source_history_yank_enable = 1
-map <unique> ,ut :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
-map <unique> ,uf :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
-"map <unique> ,ur :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
-map <unique> ,uo :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-map <unique> ,uy :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-map <unique> ,ue :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -394,17 +331,6 @@ function! HLNext (blinktime, hlgroup)
         redraw
     endfunction
 
-
-
-" recreate ctags
-func! RecreateTags()
-    if &filetype == 'c' || &filetype == 'cpp'
-        execute ':silent !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .'
-    elseif &filetype == 'php'
-        execute ':silent !ctags -R --PHP-kinds=+cf --tag-relative=yes --totals=yes .'
-    endif
-endfunc
-map <C-F12> :call RecreateTags()<CR>
 
 " add a block
 func! AddBlock(style, nr)
@@ -471,14 +397,8 @@ endif
 " beautify text
 map <unique> ,4 :%s/[[:space:]]\+$//g<CR> :%s/<C-V><CR>$//g<CR>:%retab<CR>
 
-func! Indent()
-  "execute '%!indent -nsaf -npcs -cli4 -i4 -lp -nprs -nsaw -nut -cbi4 -bl -bli0 -bls -nbad -npsl'
-  execute "%!indent -nsaf -npcs -cli4 -i4 -lp -nprs -nsaw -nut -cbi4 -bli0 -bls -nbad -npsl -bl -bad -brz -cez -cdwz -brs"
-endfunc
-
 " enter in commandmode will insert an enter (604)
 nmap <CR> :call append(line('.')-1, '')<CR><ESC>
-
 
 map <unique> <C-F1> :set number!<ESC>
 
