@@ -29,8 +29,9 @@ endfunction
 
 function s:setup_theme()
     set background=dark
+    colorscheme badwolf
+
     if has("gui_running")
-        colorscheme badwolf
         let l:fsize = "13"
         let l:font = "Consolas"
         if has("gui_kde")
@@ -45,14 +46,9 @@ function s:setup_theme()
             let l:font = "-xos4-terminus-medium-r-normal--".l:fsize."-140-72-72-c-80-iso8859-1"
         endif
         let &guifont = l:font
-    elseif &term =~ "256"
-        colorscheme badwolf
-    else
-        colorscheme lucius
     endif
 
     if has('nvim')
-        colorscheme badwolf
         set termguicolors
     endif
 endfunction
@@ -249,9 +245,23 @@ if has("digraphs")
     digraph ., 8230  " ellipsis (¿)
 endif
 
+
 set dir=$TEMP,~/tmp,/tmp
 
 
+let g:pathogen_disabled=[]
+
+execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
+execute("silent! source ".globpath(split(&rtp, ",")[0], "init.local.vim"))
+
+if !executable('git') 
+    let g:pathogen_disabled += [ 'vim-gitgutter', 'nerdtree-git-plugin' ]
+end
+if !executable('ctags')
+    let g:pathogen_disabled += [ 'tagbar', 'taglist-46' ]
+endif
+
+call pathogen#infect('3rd/{}')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -281,25 +291,9 @@ let html_number_lines=1
 let html_use_css=1
 let use_xhtml=1
 
-let g:pathogen_disabled=[]
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" local stuff
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
-execute("silent! source ".globpath(split(&rtp, ",")[0], "init.local.vim"))
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugin - settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" pathogen.vim
-if !executable('git') 
-    let g:pathogen_disabled += [ 'vim-gitgutter', 'nerdtree-git-plugin' ]
-end
-if !executable('ctags')
-    let g:pathogen_disabled += [ 'tagbar', 'taglist-46' ]
-endif
-
-call pathogen#infect('3rd/{}')
 
 " HTML
 let g:html_tag_case = 'lowercase'
