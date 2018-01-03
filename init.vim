@@ -140,6 +140,10 @@ function s:setup_visual_helpers()
        set numberwidth=3
     endif
 
+    if (has('gui_running') && v:version >= 700) || (has('nvim'))
+        set cursorline
+    endif
+
     " colorcolumn | mark 
     if exists('+cc')
         "set colorcolumn=+1   " mark textwidth + 1 column as end
