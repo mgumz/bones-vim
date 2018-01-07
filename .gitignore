@@ -1,5 +1,6 @@
 .DS_Store
 3rd/
+pack/
 vimrc.local
 init.local.vim
 .netrwhist
