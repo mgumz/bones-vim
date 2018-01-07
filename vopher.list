@@ -42,8 +42,8 @@ https://github.com/keith/swift.vim
 https://github.com/elixir-lang/vim-elixir
 
 # ctags / tags
-https://github.com/majutsushi/tagbar#v2.7
-taglist-46 http://www.vim.org/scripts/download_script.php?src_id=19574 strip=0
+#https://github.com/majutsushi/tagbar#v2.7
+#taglist-46 http://www.vim.org/scripts/download_script.php?src_id=19574 strip=0
 
 
 # different files
@@ -59,6 +59,7 @@ https://github.com/sjl/gundo.vim
 http://www.drchip.org/astronaut/vim/vbafiles/LargeFile.vba.gz
 https://github.com/tpope/vim-commentary
 https://github.com/rickhowe/diffchar.vim
+https://github.com/elzr/vim-json
 
 https://github.com/Shougo/vinarise.vim
 
