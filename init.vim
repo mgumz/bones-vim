@@ -260,17 +260,12 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " load plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pathogen_disabled=[]
+" gitgutter complaints if "git" is not available. so, disable it
+" here and check later on, if its there
+let g:gitgutter_git_executable = exepath("true")
 
 execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
 execute("silent! source ".globpath(split(&rtp, ",")[0], "init.local.vim"))
-
-if !executable('git') 
-    let g:pathogen_disabled += [ 'vim-gitgutter', 'nerdtree-git-plugin' ]
-end
-if !executable('ctags')
-    let g:pathogen_disabled += [ 'tagbar', 'taglist-46' ]
-endif
 
 " with vim8 came support for native vim packages. vim8 loads
 " all the plugins into pack/*/start/ folder(s). pathogen
@@ -312,19 +307,52 @@ let use_xhtml=1
 " plugin - settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" HTML
-let g:html_tag_case = 'lowercase'
-let g:no_html_toolbar = 'yes'
-let g:no_html_tab_mapping = 'yes'
+" vim8 situation: the plugins are loaded after vim/neovim has parsed
+" vimrc/init.vim. the VimEnter event is used to signal vim/neovim is
+" done loading all the plugins and ready for use. so, at that point
+" its useful to check if certain plugins are actually there.
+func s:setup_after_vim_enter()
 
-" scrollfix.vim
-let g:scrollfix=-1 "disabled for normal work
+    if exists("g:scrollfix_plugin")
+        let g:scrollfix=-1 "disabled for normal work
+    endif
 
-" pydoc.vim
-if has('win32') || has('win64')
-    let g:pydoc_cmd = 'python -m pydoc'
-endif
+    if exists("g:loaded_fugitive")
+        "set statusline+=%{fugitive#statusline()}
+    endif
 
+    if exists("g:loaded_gitgutter")
+        if !executable('git')
+            let g:gitgutter_enabled = 0
+        else
+            let g:gitgutter_git_executable = exepath("git")
+            exec 'GitGutterEnable'
+        end
+    endif
+
+    if exists("g:loaded_fzf")
+        " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+        command! -bang -nargs=* Rg
+          \ call fzf#vim#grep(
+          \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+          \   <bang>0 ? fzf#vim#with_preview('up:60%')
+          \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+          \   <bang>0)
+
+
+        imap <c-x><c-k> <plug>(fzf-complete-word)
+        imap <c-x><c-f> <plug>(fzf-complete-path)
+        imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+        imap <c-x><c-l> <plug>(fzf-complete-line)
+
+        autocmd! FileType fzf
+        autocmd  FileType fzf set laststatus=0 noshowmode noruler
+          \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+    endif
+endfunc
+
+autocmd VimEnter * call s:setup_after_vim_enter()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " own stuff
