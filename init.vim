@@ -13,7 +13,7 @@ scriptencoding utf-8
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function s:setup_encoding()
+func s:setup_encoding()
     if ($TERM == 'rxvt-unicode') && (&termencoding == '')
         set termencoding=utf-8
     endif
@@ -24,10 +24,10 @@ function s:setup_encoding()
         endif
     endif
     set encoding=utf-8
-endfunction
+endf
 
 
-function s:setup_theme()
+func s:setup_theme()
     set background=dark
     colorscheme badwolf
 
@@ -51,18 +51,18 @@ function s:setup_theme()
     if has('nvim')
         set termguicolors
     endif
-endfunction
+endf
 
 
-function s:setup_gui()
+func s:setup_gui()
     set guioptions=afgi
     set gcr=a:blinkwait1000-blinkon1000-blinkoff250
-endfunction
+endf
 
 
-function s:setup_tooltip()
+func s:setup_tooltip()
     if exists('+balloon_eval')
-        function! FoldSpellBalloon()
+        func! FoldSpellBalloon()
             let foldStart = foldclosed(v:beval_lnum)
             let foldEnd = foldclosedend(v:beval_lnum)
             let lines = []
@@ -84,16 +84,15 @@ function s:setup_tooltip()
                     let lines = getline(foldStart, foldEnd)
                 endif
             endif
-            " return result
-            return join( lines, has('balloon_multiline') ? '\n' : ' ' )
-        endfunction
+            return join(lines, has('balloon_multiline') ? '\n' : ' ')
+        endf
         set balloonexpr=FoldSpellBalloon()
         set noballooneval " enable it manually
     endif
-endfunction
+endfunc
 
 
-function s:setup_search()
+func s:setup_search()
     set hlsearch
 
     " This rewires n and N to do the highlighing...
@@ -108,16 +107,16 @@ function s:setup_search()
     set incsearch
     set ignorecase
     set smartcase
-endfunction
+endf
 
 
-function s:setup_ws_display()
+func s:setup_ws_display()
     " Show tabs and trailing whitespace visually
     if (&termencoding == 'utf-8' || has('gui_running'))
         if v:version >= 700
-            set listchars=tab:»·,trail:·,extends:¿,nbsp:¿
+            set listchars=tab:Â»Â·,trail:Â·,extends:Â¿,nbsp:Â¿
         else
-            set listchars=tab:»·,trail:·,extends:¿
+            set listchars=tab:Â»Â·,trail:Â·,extends:Â¿
         endif
     else
         if v:version >= 700
@@ -127,10 +126,10 @@ function s:setup_ws_display()
         endif
     endif
     set list
-endfunction
+endf
 
 
-function s:setup_visual_helpers()
+func s:setup_visual_helpers()
     set showbreak=+
     set number
     set ruler
@@ -155,10 +154,10 @@ function s:setup_visual_helpers()
     if has("syntax")
         syntax on
     endif
-endfunction
+endf
 
 
-function s:setup_lines()
+func s:setup_lines()
     set textwidth=78
     set formatoptions-=t " don't wrap at textwidth, no need to set tw=0
     set nolinebreak
@@ -167,20 +166,20 @@ function s:setup_lines()
     set softtabstop=4
     set tabstop=4
     set expandtab
-endfunction
+endf
 
 
-function s:setup_completion()
+func s:setup_completion()
     set wildignore=*.o,*.bak,*.exe,*.so
     set wildmenu                                 "menu when tabcomplete
     set wildmode=list:longest,full
     set completeopt+=longest
 
     if exists('+shellslash') | set shellslash | endif
-endfunction
+endf
 
 
-function s:setup_status_line()
+func s:setup_status_line()
     set laststatus=2
     set statusline=
     set statusline+=%-3.3n\                      " buffer number
@@ -192,10 +191,10 @@ function s:setup_status_line()
     set statusline+=%=                           " right align
     set statusline+=%-b\ 0x%-8B\                 " current char
     set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
-endfunction
+endf
 
 
-function s:setup_tags()
+func s:setup_tags()
     " search upward for a 'tags' file
     let &tags='tags;./tags'
     " add some more tags (mainly for omnicompletion)
@@ -203,28 +202,28 @@ function s:setup_tags()
     for s:tf in s:tfs
         let &tags.=','.expand(escape(escape(s:tf, ' '), ' '))
     endfor
-endfunction
+endf
 
 
-function s:setup_modeline()
+func s:setup_modeline()
     " Enable modelines only on secure vim versions
     if (v:version == 603 && has('patch045')) || (v:version > 603)
         set modeline
     else
         set nomodeline
     endif
-endfunction
+endf
 
 
-function s:setup_indentation()
+func s:setup_indentation()
     set cindent
     set cpoptions+=$
     autocmd BufRead,BufNewFile *.txt setlocal nocindent
     autocmd BufRead,BufNewFile * if &ft == 'changelog' | setlocal nocindent | endif
-endfunction
+endf
 
 
-function s:setup_window() " {{{1
+func s:setup_window()
     set scrolloff=3
     set hidden
     set lazyredraw
@@ -232,12 +231,12 @@ function s:setup_window() " {{{1
     set splitright
     set virtualedit=block
     set mouse=a
-endfunction             " }}}
+endf
 
 
-function s:setup_filehandling()
+func s:setup_filehandling()
     set dir=$TEMP,~/tmp,/tmp
-endfunction
+endf
 
 
 set nocompatible
@@ -252,9 +251,8 @@ if has('eval')
 endif
 
 if has('digraphs')
-    digraph ., 8230  " ellipsis (¿)
+    digraph ., 8230  " ellipsis (Â¿)
 endif
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -359,7 +357,7 @@ autocmd VimEnter * call s:setup_after_vim_enter()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " http://www.techtalkshub.com/instantly-better-vim/
-function! HLNext (blinktime, hlgroup)
+funct! HLNext (blinktime, hlgroup)
         let [bufnum, lnum, col, off] = getpos('.')
         let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
         let target_pat = '\c\%#'.@/
@@ -368,8 +366,7 @@ function! HLNext (blinktime, hlgroup)
         exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
         call matchdelete(ring)
         redraw
-    endfunction
-
+endfunc
 
 " add a block
 func! AddBlock(style, nr)
