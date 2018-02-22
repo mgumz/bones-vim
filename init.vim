@@ -191,6 +191,95 @@ func s:setup_status_line()
     set statusline+=%=                           " right align
     set statusline+=%-b\ 0x%-8B\                 " current char
     set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
+
+    " lightline configuration
+    let g:lightline = {
+          \ 'colorscheme': 'wombat',
+          \ 'active': {
+          \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+          \   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+          \ },
+          \ 'component_function': {
+          \   'fugitive': 'LightlineFugitive',
+          \   'filename': 'LightlineFilename',
+          \   'fileformat': 'LightlineFileformat',
+          \   'filetype': 'LightlineFiletype',
+          \   'fileencoding': 'LightlineFileencoding',
+          \   'mode': 'LightlineMode'
+          \ },
+          \ 'subseparator': { 'left': '|', 'right': '|' }
+          \ }
+
+    func! LightlineModified()
+      return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    endfunc
+
+    func! LightlineReadonly()
+      return &ft !~? 'help' && &readonly ? 'RO' : ''
+    endfunc
+
+    func! LightlineFilename()
+      let fname = expand('%:t')
+      return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+            \ fname == '__Tagbar__' ? g:lightline.fname :
+            \ fname =~ '__Gundo\|NERD_tree' ? '' :
+            \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+            \ &ft == 'unite' ? unite#get_status_string() :
+            \ &ft == 'vimshell' ? vimshell#get_status_string() :
+            \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+            \ ('' != fname ? fname : '[No Name]') .
+            \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+    endfunc
+
+    func! LightlineFugitive()
+      try
+        if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+          let mark = ''  " edit here for cool mark
+          let branch = fugitive#head()
+          return branch !=# '' ? mark.branch : ''
+        endif
+      catch
+      endtry
+      return ''
+    endfunc
+
+    func! LightlineFileformat()
+      let icon = ''
+      if exists('g:loaded_webdevicons')
+          let icon = ' ' . WebDevIconsGetFileFormatSymbol()
+      endif
+      return winwidth(0) > 70 ? &fileformat . icon : ''
+    endfunc
+
+    func! LightlineFiletype()
+      let icon = ''
+      if exists('g:loaded_webdevicons')
+          let icon = ' ' . WebDevIconsGetFileTypeSymbol()
+      endif
+      return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype . icon : 'no ft') : ''
+    endfunc
+
+    func! LightlineFileencoding()
+      return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+    endfunc
+
+    func! LightlineMode()
+      let fname = expand('%:t')
+      return fname == '__Tagbar__' ? 'Tagbar' :
+            \ fname == 'ControlP' ? 'CtrlP' :
+            \ fname == '__Gundo__' ? 'Gundo' :
+            \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+            \ fname =~ 'NERD_tree' ? 'NERDTree' :
+            \ &ft == 'unite' ? 'Unite' :
+            \ &ft == 'vimfiler' ? 'VimFiler' :
+            \ &ft == 'vimshell' ? 'VimShell' :
+            \ winwidth(0) > 60 ? lightline#mode() : ''
+    endfunc
+
+    let g:unite_force_overwrite_statusline = 0
+    let g:vimfiler_force_overwrite_statusline = 0
+    let g:vimshell_force_overwrite_statusline = 0
+
 endf
 
 
