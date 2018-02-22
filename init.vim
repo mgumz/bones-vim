@@ -254,13 +254,12 @@ if has('digraphs')
     digraph ., 8230  " ellipsis (¿)
 endif
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " load plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " gitgutter complaints if "git" is not available. so, disable it
 " here and check later on, if its there
-let g:gitgutter_git_executable = exepath("true")
+let g:gitgutter_git_executable = exepath("cat") " 'cat' works on *nix|win
 
 execute("silent! source ".globpath(split(&rtp, ",")[0], "vimrc.local"))
 execute("silent! source ".globpath(split(&rtp, ",")[0], "init.local.vim"))
