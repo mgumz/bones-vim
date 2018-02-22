@@ -304,6 +304,7 @@ let use_xhtml=1
 " plugin - settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
 " vim8 situation: the plugins are loaded after vim/neovim has parsed
 " vimrc/init.vim. the VimEnter event is used to signal vim/neovim is
 " done loading all the plugins and ready for use. so, at that point
@@ -312,10 +313,6 @@ func s:setup_after_vim_enter()
 
     if exists("g:scrollfix_plugin")
         let g:scrollfix=-1 "disabled for normal work
-    endif
-
-    if exists("g:loaded_fugitive")
-        "set statusline+=%{fugitive#statusline()}
     endif
 
     if exists("g:loaded_gitgutter")
