@@ -1,8 +1,8 @@
 00-vim-devicons https://github.com/ryanoasis/vim-devicons#v0.11.0
 
 # colors
-https://github.com/vim-scripts/badwolf
 https://github.com/hzchirs/vim-material
+https://github.com/sjl/badwolf
 
 # status-line
 https://github.com/itchyny/lightline.vim
@@ -31,7 +31,6 @@ https://github.com/yuttie/comfortable-motion.vim
 https://github.com/w0rp/ale#v2.3.0
 
 https://github.com/mitsuhiko/vim-jinja
-https://github.com/kevinw/pyflakes-vim
 
 https://github.com/fatih/vim-go#v1.21
 https://github.com/keith/swift.vim
@@ -74,6 +73,7 @@ https://github.com/vim-scripts/openssl.vim
 https://github.com/junegunn/goyo.vim
 https://github.com/junegunn/limelight.vim
 
+https://github.com/andrewstuart/vim-kubernetes
 https://github.com/google/vim-searchindex
 
 ### trying
