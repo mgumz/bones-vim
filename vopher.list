@@ -10,13 +10,13 @@ https://github.com/itchyny/lightline-powerful
 https://github.com/ap/vim-buftabline
 
 # git
-https://github.com/tpope/vim-fugitive#v3.0
+https://github.com/tpope/vim-fugitive#v3.1
 https://github.com/airblade/vim-gitgutter
 https://github.com/int3/vim-extradite
 https://github.com/idanarye/vim-merginal#2.1.1
 
 # completion
-https://github.com/junegunn/fzf#0.18.0
+https://github.com/junegunn/fzf#0.20.0
 https://github.com/junegunn/fzf.vim
 https://github.com/mattn/emmet-vim/
 https://github.com/jiangmiao/auto-pairs#v2.0.0
@@ -28,7 +28,7 @@ https://github.com/moll/vim-bbye#v1.0.1
 https://github.com/yuttie/comfortable-motion.vim
 
 # syntax-checking
-https://github.com/w0rp/ale#v2.3.0
+https://github.com/w0rp/ale#v2.6.0
 
 https://github.com/mitsuhiko/vim-jinja
 
@@ -62,7 +62,7 @@ https://github.com/Shougo/vinarise.vim
 
 https://github.com/editorconfig/editorconfig-vim#v1.0.0-bet
 
-https://github.com/scrooloose/nerdtree#6.1.1
+https://github.com/scrooloose/nerdtree#6.4.5
 https://github.com/Xuyuanp/nerdtree-git-plugin
 https://github.com/will133/vim-dirdiff
 
@@ -79,3 +79,4 @@ https://github.com/google/vim-searchindex
 ### trying
 https://github.com/google/vim-colorscheme-primary
 https://github.com/google/vim-ft-go
+https://github.com/cyberkov/openhab-vim
