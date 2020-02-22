@@ -527,4 +527,5 @@ map <unique> <C-F1> :set number!<ESC>
 " character
 noremap <space> <C-f>
 nnoremap ,cd :cd %:p:h<CR>
+nnoremap ,lcd :lcd %:p:h<CR>
 
