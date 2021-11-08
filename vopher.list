@@ -10,13 +10,13 @@ https://github.com/itchyny/lightline-powerful
 https://github.com/ap/vim-buftabline
 
 # git
-https://github.com/tpope/vim-fugitive#v3.3
+https://github.com/tpope/vim-fugitive#v3.4
 https://github.com/airblade/vim-gitgutter
 https://github.com/int3/vim-extradite
 https://github.com/idanarye/vim-merginal#2.2.0
 
 # completion
-https://github.com/junegunn/fzf#0.27.2
+https://github.com/junegunn/fzf#0.28.0
 https://github.com/junegunn/fzf.vim
 https://github.com/mattn/emmet-vim/
 https://github.com/jiangmiao/auto-pairs#v2.0.0
@@ -63,7 +63,7 @@ https://github.com/Shougo/vinarise.vim
 
 https://github.com/editorconfig/editorconfig-vim#v1.1.1
 
-https://github.com/scrooloose/nerdtree#6.10.9
+https://github.com/scrooloose/nerdtree#6.10.16
 https://github.com/Xuyuanp/nerdtree-git-plugin
 https://github.com/will133/vim-dirdiff
 
