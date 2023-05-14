@@ -324,12 +324,14 @@ endf
 
 
 func s:setup_filehandling()
-    set dir=$TEMP,~/tmp,/tmp
+    "set dir=$TEMP,~/tmp,/tmp
 endf
 
 
 set nocompatible
-set popt+=syntax:y    "syntax when printing
+if has('printer')
+    set popt+=syntax:y    "syntax when printing
+endif
 
 "set dictionary=/usr/share/dict/words
 
