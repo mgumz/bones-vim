@@ -197,7 +197,10 @@ func s:setup_status_line()
           \ 'colorscheme': 'wombat',
           \ 'active': {
           \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
-          \   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+          \   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+          \ },
+          \ 'component': {
+          \   'charvaluehex': '0x%B'
           \ },
           \ 'component_function': {
           \   'fugitive': 'LightlineFugitive',
