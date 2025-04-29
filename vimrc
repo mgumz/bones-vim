@@ -56,7 +56,6 @@ endf
 
 func s:setup_gui()
     set guioptions=afgi
-    set gcr=a:blinkwait1000-blinkon1000-blinkoff250
 endf
 
 
@@ -196,7 +195,7 @@ func s:setup_status_line()
     let g:lightline = {
           \ 'colorscheme': 'wombat',
           \ 'active': {
-          \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+          \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename', 'lsp_status' ] ],
           \   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
           \ },
           \ 'component': {
@@ -208,7 +207,8 @@ func s:setup_status_line()
           \   'fileformat': 'LightlineFileformat',
           \   'filetype': 'LightlineFiletype',
           \   'fileencoding': 'LightlineFileencoding',
-          \   'mode': 'LightlineMode'
+          \   'mode': 'LightlineMode',
+          \   'lsp_status': 'LspStatus',
           \ },
           \ 'subseparator': { 'left': '|', 'right': '|' }
           \ }
@@ -325,6 +325,13 @@ func s:setup_window()
     set mouse=a
 endf
 
+func s:setup_mouse()
+    if has('mouse_sgr')
+        set ttymouse=sgr
+    endif
+    set gcr=a:blinkwait1000-blinkon1000-blinkoff250
+endf
+
 
 func s:setup_filehandling()
     "set dir=$TEMP,~/tmp,/tmp
@@ -363,6 +370,29 @@ execute("silent! source ".globpath(split(&rtp, ",")[0], "init.local.vim"))
 " is fully aware of this and 'does the right thing'
 if !has('packages')
     call pathogen#infect()
+else
+    if has('nvim')
+        packadd! nvim-snacks
+        packadd! nvim-aerial
+        packadd! nvim-gitsigns
+        packadd! nvim-smear-cursor
+        packadd! nvim-plenary
+        packadd! nvim-trouble
+        packadd! nvim-todo-comments
+        packadd! nvim-mini
+        packadd! nvim-fzf
+
+        packadd! nvim-lspconfig
+        packadd! nvim-treesitter
+        packadd! nvim-treesitter-textobjects
+        packadd! nvim-treesitter-context
+        packadd! nvim-render-markdown
+    else
+        packadd! vim-lsp
+        packadd! vim-nerdtree
+        packadd! vim-nerdtree-git
+        packadd! vim-fzf
+    endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -381,6 +411,7 @@ call s:setup_visual_helpers()
 call s:setup_ws_display()
 call s:setup_indentation()
 
+call s:setup_mouse()
 if has('gui_running')
     call s:setup_gui()
     call s:setup_tooltip()

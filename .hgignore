@@ -1,9 +1,0 @@
-doc/tags
-spell/.*\.add
-3rd
-3rd.old
-.hgignore
-vimrc.local
-.*\.pyc
-tags/.*\.tags
-syntax: glob
