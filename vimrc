@@ -259,6 +259,9 @@ func s:setup_status_line()
       if exists('g:loaded_webdevicons')
           let icon = ' ' . WebDevIconsGetFileTypeSymbol()
       endif
+      if exists('g:loaded_devicons')
+      " FIXME    let icon = ' ' . :lua require('nvim-web-devicons').get_icons_by_extension(&filetype)
+      endif
       return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype . icon : 'no ft') : ''
     endfunc
 
@@ -371,23 +374,7 @@ execute("silent! source ".globpath(split(&rtp, ",")[0], "init.local.vim"))
 if !has('packages')
     call pathogen#infect()
 else
-    if has('nvim')
-        packadd! nvim-snacks
-        packadd! nvim-aerial
-        packadd! nvim-gitsigns
-        packadd! nvim-smear-cursor
-        packadd! nvim-plenary
-        packadd! nvim-trouble
-        packadd! nvim-todo-comments
-        packadd! nvim-mini
-        packadd! nvim-fzf
-
-        packadd! nvim-lspconfig
-        packadd! nvim-treesitter
-        packadd! nvim-treesitter-textobjects
-        packadd! nvim-treesitter-context
-        packadd! nvim-render-markdown
-    else
+    if !has('nvim')
         packadd! vim-lsp
         packadd! vim-nerdtree
         packadd! vim-nerdtree-git

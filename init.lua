@@ -1,4 +1,22 @@
+require('nvim-web-devicons').setup()
+
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/vimrc')
+
+vim.cmd('packadd! nvim-snacks')
+vim.cmd('packadd! nvim-aerial')
+vim.cmd('packadd! nvim-gitsigns')
+vim.cmd('packadd! nvim-smear-cursor')
+vim.cmd('packadd! nvim-plenary')
+vim.cmd('packadd! nvim-trouble')
+vim.cmd('packadd! nvim-todo-comments')
+vim.cmd('packadd! nvim-mini')
+vim.cmd('packadd! nvim-fzf')
+
+vim.cmd('packadd! nvim-lspconfig')
+vim.cmd('packadd! nvim-treesitter')
+vim.cmd('packadd! nvim-treesitter-textobjects')
+vim.cmd('packadd! nvim-treesitter-context')
+vim.cmd('packadd! nvim-render-markdown')
 
 require('gitsigns').setup()
 require('smear_cursor').setup()
@@ -15,6 +33,12 @@ require('snacks').setup({
     picker = { enabled = true },
     terminal = { enabled = true },
 })
+
+vim.keymap.set('n', ',p<space>', function() Snacks.picker() end)
+vim.keymap.set('n', ',of', function() Snacks.picker('explorer') end)
+vim.keymap.set('n', ',pf', function() Snacks.picker('files') end)
+vim.keymap.set('n', ',oa', function() ArialToggle() end)
+
 
 -- https://github.com/echasnovski/mini.nvim
 require('mini.pairs').setup({})
