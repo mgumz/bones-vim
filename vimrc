@@ -29,7 +29,7 @@ endf
 
 func s:setup_theme()
     set background=dark
-    colorscheme badwolf
+    colorscheme gruvbox
 
     if has('gui_running')
         let l:fsize = '13'
@@ -60,6 +60,7 @@ endf
 
 
 func s:setup_tooltip()
+" {{{
     if exists('+balloon_eval')
         func! FoldSpellBalloon()
             let foldStart = foldclosed(v:beval_lnum)
@@ -89,7 +90,7 @@ func s:setup_tooltip()
         set noballooneval " enable it manually
     endif
 endfunc
-
+" }}}
 
 func s:setup_search()
     set hlsearch
@@ -179,6 +180,7 @@ endf
 
 
 func s:setup_status_line()
+" {{{
     set laststatus=2
     set statusline=
     set statusline+=%-3.3n\                      " buffer number
@@ -284,7 +286,7 @@ func s:setup_status_line()
     let g:vimshell_force_overwrite_statusline = 0
 
 endf
-
+" }}}
 
 func s:setup_tags()
     " search upward for a 'tags' file
@@ -550,3 +552,5 @@ noremap <space> <C-f>
 nnoremap ,cd :cd %:p:h<CR>
 nnoremap ,lcd :lcd %:p:h<CR>
 
+
+" vim: ft=vim fdm=marker

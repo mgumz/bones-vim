@@ -165,4 +165,5 @@ vim.keymap.set("n", ",p<space>", function() Snacks.picker() end)
 vim.keymap.set("n", ",pf", function() Snacks.picker("files") end)
 vim.keymap.set("n", ",te", function() Snacks.picker("explorer") end)
 vim.keymap.set("n", ",ta", function() vim.cmd("AerialToggle") end)
+vim.keymap.set("n", ",pg", function() Snacks.lazygit() end )
 
