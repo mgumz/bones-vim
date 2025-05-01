@@ -2,7 +2,7 @@
 
 ## Content
 
-    vimrc          - my vim settings
+    vimrc          - vim settings
     init.lua       - neovim entrypoint, injects vimrc
 
 ## Installation
@@ -22,11 +22,10 @@ and … thats it.
 I use the following organisation for the external plugin / packages:
 
 * `pack`                 - the regular package folder
-* `pack/{section}`       - ui, colors, other, etc
+* `pack/{section}`       - common (for both vim + nvim), nvim, vim
 * `pack/{section}/opt`   - packages which I either do not want to have active
                          all the time OR which are useful only in neovim
-                         or in vanilla vim. I activate the latter packages
-                         from within `vimrc`, search for `packadd`
+                         or in vanilla vim.
 * `pack/{section}/start` - packages to start automatically upon start of
                          neovim/vim
 

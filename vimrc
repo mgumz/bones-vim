@@ -259,9 +259,6 @@ func s:setup_status_line()
       if exists('g:loaded_webdevicons')
           let icon = ' ' . WebDevIconsGetFileTypeSymbol()
       endif
-      if exists('g:loaded_devicons')
-      " FIXME    let icon = ' ' . :lua require('nvim-web-devicons').get_icons_by_extension(&filetype)
-      endif
       return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype . icon : 'no ft') : ''
     endfunc
 
@@ -379,6 +376,7 @@ else
         packadd! vim-nerdtree
         packadd! vim-nerdtree-git
         packadd! vim-fzf
+        packadd! vim-lightline
     endif
 endif
 
