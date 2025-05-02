@@ -12,16 +12,19 @@ common/start/vim-zoom       https://github.com/dhruvasagar/vim-zoom
 common/start/indent-guides  https://github.com/preservim/vim-indent-guides
 
 nvim/opt/nvim-aerial        https://github.com/stevearc/aerial.nvim#v2.5.0
-nvim/opt/nvim-wev-devicons  https://github.com/nvim-tree/nvim-web-devicons#v0.100
 nvim/opt/nvim-gitsigns      https://github.com/lewis6991/gitsigns.nvim
 nvim/opt/nvim-lualine       https://github.com/nvim-lualine/lualine.nvim
 nvim/opt/nvim-mini          https://github.com/echasnovski/mini.nvim
-nvim/opt/nvim-plenary       https://github.com/nvim-lua/plenary.nvim     # dep of todo-comments
+nvim/opt/nvim-neotree       https://github.com/nvim-neo-tree/neo-tree.nvim#3.32
 nvim/opt/nvim-smear-cursor  https://github.com/sphamba/smear-cursor.nvim#v0.4.5
 nvim/opt/nvim-snacks        https://github.com/folke/snacks.nvim
 nvim/opt/nvim-todo-comments https://github.com/folke/todo-comments.nvim
 nvim/opt/nvim-trouble       https://github.com/folke/trouble.nvim#v3.7.1
-nvim/opt/nvim-twilight      https://github.com/folke/twilight.nvim
+nvim/opt/nvim-wev-devicons  https://github.com/nvim-tree/nvim-web-devicons#v0.100
+# disabled: snacks.dim nvim/opt/nvim-twilight      https://github.com/folke/twilight.nvim
+
+nvim/opt/nvim-plenary       https://github.com/nvim-lua/plenary.nvim     # dep of todo-comments,neo-tree
+nvim/opt/nvim-nui           https://github.com/MunifTanjim/nui.nvim      # dep of neo-tree
 
 vim/opt/vim-devicons        https://github.com/ryanoasis/vim-devicons
 vim/opt/vim-nerdtree        https://github.com/preservim/nerdtree#7.1.3

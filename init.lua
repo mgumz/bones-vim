@@ -14,7 +14,9 @@ local packs = {
 	"nvim-gitsigns",
 	"nvim-lspconfig",
 	"nvim-mini",
+	"nvim-neotree",
 	"nvim-plenary",
+	"nvim-nui",
 	"nvim-render-markdown",
 	"nvim-smear-cursor",
 	"nvim-snacks",
@@ -31,20 +33,26 @@ for _, p in ipairs(packs) do vim.cmd("packadd! " .. p) end
 -------------------------------------------------------------------------------
 
 require("nvim-web-devicons").setup()
-require("gitsigns").setup()
+require("gitsigns").setup({
+	signcolumn = true,
+	numhl = true,
+	word_diff = true,
+})
 require("smear_cursor").setup()
 require("aerial").setup()
 require("todo-comments").setup()
 require("trouble").setup()
+require("neo-tree").setup()
 
 -- https://github.com/folke/snacks.nvim
 require("snacks").setup({
 	dim = { enabled = true },
-	explorer = { enabled = true },
+	-- explorer = { enabled = true },
 	indent = { enabled = true },
 	image = { enabled = true },
 	lazygit = { enabled = true },
 	picker = { enabled = true },
+	scroll = { enabled = false },
 	terminal = { enabled = true },
 })
 
@@ -163,7 +171,7 @@ end
 
 vim.keymap.set("n", ",p<space>", function() Snacks.picker() end)
 vim.keymap.set("n", ",pf", function() Snacks.picker("files") end)
-vim.keymap.set("n", ",te", function() Snacks.picker("explorer") end)
+vim.keymap.set("n", ",tt", function() vim.cmd("Neotree") end)
 vim.keymap.set("n", ",ta", function() vim.cmd("AerialToggle") end)
 vim.keymap.set("n", ",pg", function() Snacks.lazygit() end )
 
