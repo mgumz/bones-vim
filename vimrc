@@ -55,7 +55,9 @@ endf
 
 
 func s:setup_gui()
-    set guioptions=afgi
+    if !has('nvim')
+        set guioptions=afgi
+    endif
 endf
 
 

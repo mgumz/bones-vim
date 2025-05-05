@@ -13,7 +13,7 @@ Use https://github.com/mgumz/vopher to fetch and extract the base.
 
 Then fetch all plugins:
 
-    $> cd ~/.config/nvim && bash do.sh up
+    $> cd ~/.config/nvim && bash pack.sh up
 
 and … thats it.
 

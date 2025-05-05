@@ -13,7 +13,7 @@ local packs = {
 	"nvim-fzf",
 	"nvim-gitsigns",
 	"nvim-lspconfig",
-	"nvim-mini",
+	"nvim-lualine",
 	"nvim-neotree",
 	"nvim-plenary",
 	"nvim-nui",
@@ -26,7 +26,6 @@ local packs = {
 	"nvim-treesitter-textobjects",
 	"nvim-trouble",
 	"nvim-web-devicons",
-    "nvim-lualine",
 }
 for _, p in ipairs(packs) do vim.cmd("packadd! " .. p) end
 
@@ -36,31 +35,29 @@ require("nvim-web-devicons").setup()
 require("gitsigns").setup({
 	signcolumn = true,
 	numhl = true,
-	word_diff = true,
+----	word_diff = true,
 })
+require("neo-tree").setup()
 require("smear_cursor").setup()
 require("aerial").setup()
 require("todo-comments").setup()
 require("trouble").setup()
-require("neo-tree").setup()
 
 -- https://github.com/folke/snacks.nvim
 require("snacks").setup({
 	dim = { enabled = true },
 	-- explorer = { enabled = true },
-	indent = { enabled = true },
+	indent = { enabled = true, scope = { enabled = false }, animate = { enabled = false } }, 
 	image = { enabled = true },
 	lazygit = { enabled = true },
 	picker = { enabled = true },
-	scroll = { enabled = false },
+	scroll = { enabled = true },
 	terminal = { enabled = true },
+	statuscolumn = { enabled = false },
 })
 
 -- https://github.com/nvim-lualine/lualine.nvim
 require("lualine").setup()
-
--- https://github.com/echasnovski/mini.nvim
-require("mini.pairs").setup({})
 
 -- https://github.com/nvim-treesitter/nvim-treesitter
 local dp = vim.fn.stdpath("data") .. "/treesitter"
@@ -88,6 +85,7 @@ require("nvim-treesitter.configs").setup({
 		"python",
 		"regex",
 		"rust",
+		"ssh_config",
 		"swift",
 		"tsv",
 		"tmux",
@@ -128,18 +126,18 @@ local lsp_config = {
 	gopls = {
 		enable = true,
 		config = {
-			-- on_attach = lsp_status.on_attach,
 			settings = {
 				gopls = {
 					analyses = {
 						unusedparams = true,
+						composites = false,
 					},
-					staticcheck = true,
+					-- staticcheck = true,
 				},
 			},
 		},
 	},
-	harper_ls = { enable = true, config = {} },
+	harper_ls = { enable = false, config = {} },
 	marksman = { enable = true, config = {} },
 	yamlls = { enable = true, config = {} },
 	rust_analyzer = {
@@ -171,7 +169,8 @@ end
 
 vim.keymap.set("n", ",p<space>", function() Snacks.picker() end)
 vim.keymap.set("n", ",pf", function() Snacks.picker("files") end)
-vim.keymap.set("n", ",tt", function() vim.cmd("Neotree") end)
+-- vim.keymap.set("n", ",tt", function() Snacks.explorer() end)
+vim.keymap.set("n", ",tt", function() vim.cmd("Neotree toggle") end)
 vim.keymap.set("n", ",ta", function() vim.cmd("AerialToggle") end)
 vim.keymap.set("n", ",pg", function() Snacks.lazygit() end )
 
