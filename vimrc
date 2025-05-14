@@ -29,7 +29,7 @@ endf
 
 func s:setup_theme()
     set background=dark
-    colorscheme gruvbox
+    colorscheme badwolf
 
     if has('gui_running')
         let l:fsize = '13'
