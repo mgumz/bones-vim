@@ -168,12 +168,14 @@ end
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
-local wopts = { win = { border = "rounded" } }
+local wo = { border = "rounded" }
 
 vim.keymap.set("n", ",p<space>", function() Snacks.picker() end)
 vim.keymap.set("n", ",pg", function() Snacks.lazygit() end)
-vim.keymap.set("n", ",pfm", function() Snacks.terminal("fzf-make", { auto_close = false, win = wopts } ) end)
-vim.keymap.set("n", ",pmc", function() Snacks.terminal("mc . .", { win = wopts } ) end)
+vim.keymap.set("n", ",pfm", function() Snacks.terminal("fzf-make", { auto_close = false, win = wo } ) end)
+vim.keymap.set("n", ",pmc", function() Snacks.terminal("mc . .", { win = wo } ) end)
+vim.keymap.set("n", ",pk9", function() Snacks.terminal("k9s", { win = wo } ) end)
+vim.keymap.set("n", ",pt", function() Snacks.terminal(nil) end)
 
 -- vim.keymap.set("n", ",tt", function() Snacks.explorer() end)
 vim.keymap.set("n", ",tt", function() vim.cmd("Neotree toggle") end)
