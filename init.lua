@@ -26,6 +26,7 @@ local packs = {
     "nvim-treesitter-textobjects",
     "nvim-trouble",
     "nvim-web-devicons",
+    "nvim-which-key",
 }
 for _, p in ipairs(packs) do vim.cmd("packadd! " .. p) end
 
@@ -42,6 +43,14 @@ require("smear_cursor").setup()
 require("aerial").setup()
 require("todo-comments").setup()
 require("trouble").setup()
+require("which-key").setup({
+    preset = "modern",
+    win = { border = "rounded" },
+    -- triggers = {
+    --     { "<leader>", mode = { "n", "v" } },
+    -- }
+})
+
 
 -- https://github.com/folke/snacks.nvim
 require("snacks").setup({
@@ -58,6 +67,13 @@ require("snacks").setup({
 
 -- https://github.com/nvim-lualine/lualine.nvim
 require("lualine").setup()
+
+-- https://github.com/MeanderingProgrammer/render-markdown.nvim#setup
+require('render-markdown').setup({
+    heading = {
+        enabled = false
+    }
+})
 
 -- https://github.com/nvim-treesitter/nvim-treesitter
 local dp = vim.fn.stdpath("data") .. "/treesitter"
@@ -82,6 +98,7 @@ require("nvim-treesitter.configs").setup({
         "json",
         "lua",
         "markdown", "markdown_inline",
+        "powershell",
         "python",
         "regex",
         "rust",
@@ -140,7 +157,19 @@ local lsp_config = {
     harper_ls = { enable = false, config = {} },
     lua_ls = { enable = true, config = {} }, -- see .luarc.json
     marksman = { enable = true, config = {} },
-    yamlls = { enable = true, config = {} },
+    powershell_es = {
+        enable = true,
+        config = {
+            bundle_path = "/Users/mg/.cache/powershell/pses/PowerShellEditorServices",
+            cmd = {
+                "pwsh",
+                    "-NoLogo",
+                    "-NoProfile",
+                    "-Command", "~/.cache/powershell/pses/PowerShellEditorServices/Start-EditorServices.ps1",
+                    "-SessionDetailsPath", "~/.cache/powershell/ps-ls-session.json",
+            },
+        },
+    },
     rust_analyzer = {
         enable = true,
         config = { settings = { ["rust-analyzer"] = { diagnostics = { enable = false } } } },
@@ -158,6 +187,7 @@ local lsp_config = {
             },
         },
     },
+    yamlls = { enable = true, config = {} },
 }
 
 for n, l in pairs(lsp_config) do
@@ -170,13 +200,31 @@ end
 
 local wo = { border = "rounded" }
 
-vim.keymap.set("n", ",p<space>", function() Snacks.picker() end)
-vim.keymap.set("n", ",pg", function() Snacks.lazygit() end)
-vim.keymap.set("n", ",pfm", function() Snacks.terminal("fzf-make", { auto_close = false, win = wo } ) end)
-vim.keymap.set("n", ",pmc", function() Snacks.terminal("mc . .", { win = wo } ) end)
-vim.keymap.set("n", ",pk9", function() Snacks.terminal("k9s", { win = wo } ) end)
-vim.keymap.set("n", ",pt", function() Snacks.terminal(nil) end)
+vim.keymap.set("n", ",?",
+    function() require("which-key").show({ global = false }) end,
+    { desc = "show keymaps" })
+vim.keymap.set("n", ",p<space>",
+    function() Snacks.picker() end,
+    { desc = "snack picker" })
+vim.keymap.set("n", ",pg",
+    function() Snacks.lazygit() end,
+    { desc = "open lazygit" })
+vim.keymap.set("n", ",pfm",
+    function() Snacks.terminal("fzf-make", { auto_close = false, win = wo } ) end,
+    { desc = "trigger fzf-make" })
+vim.keymap.set("n", ",pmc",
+    function() Snacks.terminal("mc . .", { win = wo } ) end,
+    { desc = "open mc" })
+vim.keymap.set("n", ",pk9",
+    function() Snacks.terminal("k9s", { win = wo } ) end,
+    { desc = "open k9s" })
+vim.keymap.set("n", ",pt",
+    function() Snacks.terminal(nil) end,
+    { desc = "open terminal" })
+vim.keymap.set("n", ",tt",
+    function() vim.cmd("Neotree toggle") end,
+    { desc = "toggle Neotree"})
+vim.keymap.set("n", ",ta",
+    function() vim.cmd("AerialToggle") end,
+    { desc = "toggle Arial"})
 
--- vim.keymap.set("n", ",tt", function() Snacks.explorer() end)
-vim.keymap.set("n", ",tt", function() vim.cmd("Neotree toggle") end)
-vim.keymap.set("n", ",ta", function() vim.cmd("AerialToggle") end)
