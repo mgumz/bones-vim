@@ -8,42 +8,64 @@ vim.cmd("source " .. vim.fn.stdpath("config") .. "/vimrc")
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
+local function load(name, version)
+    if (version ~= nil) and (vim.fn.has(version) == 0) then
+        return
+    end
+    local c = "packadd! " .. name
+    --   print(name, version, c)
+    vim.cmd(c)
+end
+
+local function setup(name, opts)
+    local ok, pack = pcall(require, name)
+    if ok then
+        pack.setup(opts)
+    end
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
 local packs = {
-    "nvim-aerial",
-    "nvim-fzf",
-    "nvim-gitsigns",
-    "nvim-lspconfig",
-    "nvim-lualine",
-    "nvim-neotree",
-    "nvim-plenary",
-    "nvim-nui",
-    "nvim-render-markdown",
-    "nvim-smear-cursor",
-    "nvim-snacks",
-    "nvim-todo-comments",
-    "nvim-treesitter",
-    "nvim-treesitter-context",
-    "nvim-treesitter-textobjects",
-    "nvim-trouble",
-    "nvim-web-devicons",
-    "nvim-which-key",
+    { "nvim-aerial", nvim = "nvim-0.8" },
+    { "nvim-fzf", nvim = "nvim-0.9" },
+    { "nvim-gitsigns", nvim = "nvim-0.9" },
+    { "nvim-lspconfig", nvim = "nvim-0.10" },
+    { "nvim-lualine", nvim = "nvim-0.7" },
+    { "nvim-neotree", nvim = "nvim-0.8" },
+    { "nvim-nui", nvim = "nvim-0.5" },
+    { "nvim-plenary", nvim = "nvim-0.8" },
+    { "nvim-render-markdown", nvim = "nvim-0.10" },
+    { "nvim-smear-cursor", nvim = "0.10.2" },
+    { "nvim-snacks", nvim = "nvim-0.9.4" },
+    { "nvim-todo-comments", nvim = "nvim-0.8" },
+    { "nvim-treesitter", nvim = "nvim-0.10" },
+    { "nvim-treesitter-context", nvim = "nvim-0.10" },
+    { "nvim-treesitter-textobjects", nvim = "nvim-0.10" },
+    { "nvim-trouble", nvim = "nvim-0.9" },
+    { "nvim-web-devicons", nvim = "nvim-0.7.0" },
+    { "nvim-which-key", nvim = "nvim-0.9.4" },
 }
-for _, p in ipairs(packs) do vim.cmd("packadd! " .. p) end
+
+for _, p in ipairs(packs) do
+    load(p[1], p.nvim)
+end
 
 -------------------------------------------------------------------------------
 
-require("nvim-web-devicons").setup()
-require("gitsigns").setup({
+setup("nvim-web-devicons", {})
+setup("gitsigns", {
     signcolumn = true,
     numhl = true,
     --	word_diff = true,
 })
-require("neo-tree").setup()
-require("smear_cursor").setup()
-require("aerial").setup()
-require("todo-comments").setup()
-require("trouble").setup()
-require("which-key").setup({
+setup("neo-tree")
+setup("smear_cursor")
+setup("aerial")
+setup("todo-comments")
+setup("trouble")
+setup("which-key", {
     preset = "modern",
     win = { border = "rounded" },
     -- triggers = {
@@ -51,9 +73,8 @@ require("which-key").setup({
     -- }
 })
 
-
 -- https://github.com/folke/snacks.nvim
-require("snacks").setup({
+setup("snacks", {
     dim = { enabled = true },
     -- explorer = { enabled = true },
     indent = { enabled = true, scope = { enabled = false }, animate = { enabled = false } },
@@ -66,10 +87,10 @@ require("snacks").setup({
 })
 
 -- https://github.com/nvim-lualine/lualine.nvim
-require("lualine").setup()
+setup("lualine")
 
 -- https://github.com/MeanderingProgrammer/render-markdown.nvim#setup
-require('render-markdown').setup({
+setup('render-markdown', {
     heading = {
         enabled = false
     }
@@ -78,7 +99,7 @@ require('render-markdown').setup({
 -- https://github.com/nvim-treesitter/nvim-treesitter
 local dp = vim.fn.stdpath("data") .. "/treesitter"
 vim.opt.runtimepath:prepend(dp)
-require("nvim-treesitter.configs").setup({
+setup("nvim-treesitter.configs", {
     parser_install_dir = dp,
     ensure_installed = {
         "awk",
@@ -114,7 +135,7 @@ require("nvim-treesitter.configs").setup({
     textobjects = { select = { enable = true, }, },
 })
 
-require("treesitter-context").setup({
+setup("treesitter-context", {
     enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
     multiwindow = false,      -- Enable multiwindow support.
     max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
@@ -158,7 +179,7 @@ local lsp_config = {
     lua_ls = { enable = true, config = {} }, -- see .luarc.json
     marksman = { enable = true, config = {} },
     powershell_es = {
-        enable = true,
+        enable = false,
         config = {
             bundle_path = "/Users/mg/.cache/powershell/pses/PowerShellEditorServices",
             cmd = {
@@ -191,8 +212,10 @@ local lsp_config = {
 }
 
 for n, l in pairs(lsp_config) do
-    vim.lsp.config(n, l.config)
-    if (l.enable == true) then vim.lsp.enable(n) end
+    if l["config"] ~= nil and vim["lsp"] and vim.lsp["config"] then
+        vim.lsp.config(n, l.config)
+        if (l.enable == true) then vim.lsp.enable(n) end
+    end
 end
 
 -------------------------------------------------------------------------------
