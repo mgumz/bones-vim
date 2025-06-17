@@ -28,28 +28,28 @@ end
 -------------------------------------------------------------------------------
 
 local packs = {
-    { "nvim-aerial", nvim = "nvim-0.8" },
-    { "nvim-fzf", nvim = "nvim-0.9" },
-    { "nvim-gitsigns", nvim = "nvim-0.9" },
-    { "nvim-lspconfig", nvim = "nvim-0.10" },
-    { "nvim-lualine", nvim = "nvim-0.7" },
-    { "nvim-neotree", nvim = "nvim-0.8" },
-    { "nvim-nui", nvim = "nvim-0.5" },
-    { "nvim-plenary", nvim = "nvim-0.8" },
-    { "nvim-render-markdown", nvim = "nvim-0.10" },
-    { "nvim-smear-cursor", nvim = "0.10.2" },
-    { "nvim-snacks", nvim = "nvim-0.9.4" },
-    { "nvim-todo-comments", nvim = "nvim-0.8" },
-    { "nvim-treesitter", nvim = "nvim-0.10" },
-    { "nvim-treesitter-context", nvim = "nvim-0.10" },
-    { "nvim-treesitter-textobjects", nvim = "nvim-0.10" },
-    { "nvim-trouble", nvim = "nvim-0.9" },
-    { "nvim-web-devicons", nvim = "nvim-0.7.0" },
-    { "nvim-which-key", nvim = "nvim-0.9.4" },
+    { name = "nvim-aerial", nvim = "nvim-0.8" },
+    { name = "nvim-fzf", nvim = "nvim-0.9" },
+    { name = "nvim-gitsigns", nvim = "nvim-0.9" },
+    { name = "nvim-lspconfig", nvim = "nvim-0.10" },
+    { name = "nvim-lualine", nvim = "nvim-0.7" },
+    { name = "nvim-neotree", nvim = "nvim-0.8" },
+    { name = "nvim-nui", nvim = "nvim-0.5" },
+    { name = "nvim-plenary", nvim = "nvim-0.8" },
+    { name = "nvim-render-markdown", nvim = "nvim-0.10" },
+    { name = "nvim-smear-cursor", nvim = "0.10.2" },
+    { name = "nvim-snacks", nvim = "nvim-0.9.4" },
+    { name = "nvim-todo-comments", nvim = "nvim-0.8" },
+    { name = "nvim-treesitter", nvim = "nvim-0.10" },
+    { name = "nvim-treesitter-context", nvim = "nvim-0.10" },
+    { name = "nvim-treesitter-textobjects", nvim = "nvim-0.10" },
+    { name = "nvim-trouble", nvim = "nvim-0.9" },
+    { name = "nvim-web-devicons", nvim = "nvim-0.7.0" },
+    { name = "nvim-which-key", nvim = "nvim-0.9.4" },
 }
 
 for _, p in ipairs(packs) do
-    load(p[1], p.nvim)
+    load(p.name, p.nvim)
 end
 
 -------------------------------------------------------------------------------
@@ -106,10 +106,10 @@ setup("nvim-treesitter.configs", {
         "bash",
         "c",
         "csv",
-        "cpp",
+        -- "cpp",
         "dockerfile",
-        "erlang",
-        "elixir",
+        -- "erlang",
+        -- "elixir",
         "go",
         "gomod",
         "gotmpl",
@@ -118,22 +118,34 @@ setup("nvim-treesitter.configs", {
         "gitignore",
         "json",
         "lua",
+        "make",
         "markdown", "markdown_inline",
-        "powershell",
+        "muttrc",
+        -- "powershell",
         "python",
         "regex",
-        "rust",
+        -- "rust",
         "ssh_config",
-        "swift",
+        -- "swift",
         "tsv",
         "tmux",
-        "typst",
+        -- "typst",
         "vim",
         "yaml",
     },
     highlight = { enable = true, },
     textobjects = { select = { enable = true, }, },
 })
+
+-- https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#adding-parsers
+-- NOTE: `:TSInstall mail` does not work as of 2025-06-01
+require("nvim-treesitter.parsers").mail = {
+    install_info = {
+        -- path = "~/oss-land/3rd/tree-sitter-mail",
+        url = "https://github.com/stevenxxiu/tree-sitter-mail.git",
+        branch = "master",
+    }
+}
 
 setup("treesitter-context", {
     enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -152,11 +164,13 @@ setup("treesitter-context", {
 })
 
 local lsp_config = {
+    -- https://stackoverflow.com/questions/59263015/cmake-how-to-change-compile-commands-json-output-location
     clangd = {
         enable = true,
         config = {
-            cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose", "--query-driver=/usr/bin/cc" },
+            cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose", "--query-driver=/usr/bin/clang" },
             init_options = {
+                compilationDatabasePath = './build/'
                 -- fallbackFlags = { '-std=c++17' },
             },
         },

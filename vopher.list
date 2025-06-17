@@ -38,7 +38,7 @@ common/start/ale                     https://github.com/w0rp/ale#v4.0.0
 common/start/vim-go                  https://github.com/fatih/vim-go
 
 nvim/opt/nvim-lspconfig              https://github.com/neovim/nvim-lspconfig#v2.1.0
-nvim/opt/nvim-treesitter             https://github.com/nvim-treesitter/nvim-treesitter
+nvim/opt/nvim-treesitter             https://github.com/nvim-treesitter/nvim-treesitter#v0.10.0
 nvim/opt/nvim-treesitter-textobjects https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 nvim/opt/nvim-treesitter-context     https://github.com/nvim-treesitter/nvim-treesitter-context
 nvim/opt/nvim-render-markdown        https://github.com/MeanderingProgrammer/render-markdown.nvim
