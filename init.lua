@@ -37,7 +37,7 @@ local packs = {
     { name = "nvim-nui", nvim = "nvim-0.5" },
     { name = "nvim-plenary", nvim = "nvim-0.8" },
     { name = "nvim-render-markdown", nvim = "nvim-0.10" },
-    { name = "nvim-smear-cursor", nvim = "0.10.2" },
+    { name = "nvim-smear-cursor", nvim = "nvim-0.10.2" },
     { name = "nvim-snacks", nvim = "nvim-0.9.4" },
     { name = "nvim-todo-comments", nvim = "nvim-0.8" },
     { name = "nvim-treesitter", nvim = "nvim-0.10" },
