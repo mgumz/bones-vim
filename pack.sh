@@ -9,6 +9,9 @@ case "$1" in
     up)
         vopher -dir pack up
         ;;
+    status)
+        vopher -dir pack status
+        ;;
     check)
         vopher -dir pack check
 esac
